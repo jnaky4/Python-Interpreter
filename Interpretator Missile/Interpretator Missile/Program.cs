@@ -40,6 +40,13 @@ namespace Interpretator_Missile
                 }
                 if (ourString.Length == 0) indentation = 0;
                 //Gives us correct indentation
+
+                if (ourString.Contains("print(\"") && ourString.Contains("\")"))
+                {
+                    ourString = ourString.Substring(ourString.IndexOf("print(\""), ourString.IndexOf("\")"));
+                    ourString = ourString.Substring(ourString.IndexOf("\"") + 1);
+                    Console.WriteLine(ourString);
+                }
             }
             
         }
