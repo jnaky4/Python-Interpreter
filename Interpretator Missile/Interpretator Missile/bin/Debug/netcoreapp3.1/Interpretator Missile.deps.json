@@ -8,10 +8,19 @@
     ".NETCoreApp,Version=v3.1": {
       "Interpretator Missile/1.0.0": {
         "dependencies": {
+          "MathParser.org-mXparser": "4.4.2",
           "python": "3.9.0"
         },
         "runtime": {
           "Interpretator Missile.dll": {}
+        }
+      },
+      "MathParser.org-mXparser/4.4.2": {
+        "runtime": {
+          "lib/netcoreapp31/MathParser.org-mXparser.dll": {
+            "assemblyVersion": "4.4.2.0",
+            "fileVersion": "4.4.2.0"
+          }
         }
       },
       "python/3.9.0": {}
@@ -22,6 +31,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "MathParser.org-mXparser/4.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-V72hYZPG3VEt9NgjQ2gXxL55JWNlgi8TDLOgtoNu8raYVb+IRqgQTKssvDyGK5vzyvTi9WglmmbkEODhgeI4+w==",
+      "path": "mathparser.org-mxparser/4.4.2",
+      "hashPath": "mathparser.org-mxparser.4.4.2.nupkg.sha512"
     },
     "python/3.9.0": {
       "type": "package",

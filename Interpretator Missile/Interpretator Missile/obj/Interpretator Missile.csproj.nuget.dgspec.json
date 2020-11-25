@@ -40,6 +40,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "MathParser.org-mXparser": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            },
             "python": {
               "target": "Package",
               "version": "[3.9.0, )"

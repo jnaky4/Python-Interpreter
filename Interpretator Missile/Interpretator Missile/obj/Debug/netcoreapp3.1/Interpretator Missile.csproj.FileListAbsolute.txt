@@ -11,3 +11,5 @@ F:\source\repos\Python-Interpreter\Interpretator Missile\Interpretator Missile\o
 F:\source\repos\Python-Interpreter\Interpretator Missile\Interpretator Missile\obj\Debug\netcoreapp3.1\Interpretator Missile.pdb
 F:\source\repos\Python-Interpreter\Interpretator Missile\Interpretator Missile\obj\Debug\netcoreapp3.1\Interpretator Missile.genruntimeconfig.cache
 F:\source\repos\Python-Interpreter\Interpretator Missile\Interpretator Missile\obj\Debug\netcoreapp3.1\Interpretator Missile.csprojAssemblyReference.cache
+F:\source\repos\Python-Interpreter\Interpretator Missile\Interpretator Missile\bin\Debug\netcoreapp3.1\MathParser.org-mXparser.dll
+F:\source\repos\Python-Interpreter\Interpretator Missile\Interpretator Missile\obj\Debug\netcoreapp3.1\Interpretator Missile.csproj.CopyComplete

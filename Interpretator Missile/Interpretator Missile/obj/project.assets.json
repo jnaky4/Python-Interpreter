@@ -2,12 +2,81 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "MathParser.org-mXparser/4.4.2": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp31/MathParser.org-mXparser.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp31/MathParser.org-mXparser.dll": {}
+        }
+      },
       "python/3.9.0": {
         "type": "package"
       }
     }
   },
   "libraries": {
+    "MathParser.org-mXparser/4.4.2": {
+      "sha512": "V72hYZPG3VEt9NgjQ2gXxL55JWNlgi8TDLOgtoNu8raYVb+IRqgQTKssvDyGK5vzyvTi9WglmmbkEODhgeI4+w==",
+      "type": "package",
+      "path": "mathparser.org-mxparser/4.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.txt",
+        "images/icon.png",
+        "lib/net20/MathParser.org-mXparser.dll",
+        "lib/net35/MathParser.org-mXparser.dll",
+        "lib/net40/MathParser.org-mXparser.dll",
+        "lib/net45/MathParser.org-mXparser.dll",
+        "lib/net451/MathParser.org-mXparser.dll",
+        "lib/net452/MathParser.org-mXparser.dll",
+        "lib/net46/MathParser.org-mXparser.dll",
+        "lib/net461/MathParser.org-mXparser.dll",
+        "lib/net462/MathParser.org-mXparser.dll",
+        "lib/net47/MathParser.org-mXparser.dll",
+        "lib/net471/MathParser.org-mXparser.dll",
+        "lib/net472/MathParser.org-mXparser.dll",
+        "lib/net48/MathParser.org-mXparser.dll",
+        "lib/netcoreapp10/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp10/MathParser.org-mXparser.dll",
+        "lib/netcoreapp11/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp11/MathParser.org-mXparser.dll",
+        "lib/netcoreapp20/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp20/MathParser.org-mXparser.dll",
+        "lib/netcoreapp21/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp21/MathParser.org-mXparser.dll",
+        "lib/netcoreapp22/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp22/MathParser.org-mXparser.dll",
+        "lib/netcoreapp30/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp30/MathParser.org-mXparser.dll",
+        "lib/netcoreapp31/MathParser.org-mXparser.deps.json",
+        "lib/netcoreapp31/MathParser.org-mXparser.dll",
+        "lib/netstandard10/MathParser.org-mXparser.deps.json",
+        "lib/netstandard10/MathParser.org-mXparser.dll",
+        "lib/netstandard11/MathParser.org-mXparser.deps.json",
+        "lib/netstandard11/MathParser.org-mXparser.dll",
+        "lib/netstandard12/MathParser.org-mXparser.deps.json",
+        "lib/netstandard12/MathParser.org-mXparser.dll",
+        "lib/netstandard13/MathParser.org-mXparser.deps.json",
+        "lib/netstandard13/MathParser.org-mXparser.dll",
+        "lib/netstandard14/MathParser.org-mXparser.deps.json",
+        "lib/netstandard14/MathParser.org-mXparser.dll",
+        "lib/netstandard15/MathParser.org-mXparser.deps.json",
+        "lib/netstandard15/MathParser.org-mXparser.dll",
+        "lib/netstandard16/MathParser.org-mXparser.deps.json",
+        "lib/netstandard16/MathParser.org-mXparser.dll",
+        "lib/netstandard20/MathParser.org-mXparser.deps.json",
+        "lib/netstandard20/MathParser.org-mXparser.dll",
+        "lib/netstandard21/MathParser.org-mXparser.deps.json",
+        "lib/netstandard21/MathParser.org-mXparser.dll",
+        "lib/portable45-net45+win8+wpa81/MathParser.org-mXparser.dll",
+        "mathparser.org-mxparser.4.4.2.nupkg.sha512",
+        "mathparser.org-mxparser.nuspec"
+      ]
+    },
     "python/3.9.0": {
       "sha512": "T+g2g1zd43K1mJoML0Yy/7G3P6QEB6E0BbkAKOS4dKQZJj6/Y0mZs+Dm7OY1JDCJzpzYpcY28/dIuoLYFvtgUA==",
       "type": "package",
@@ -1512,6 +1581,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "MathParser.org-mXparser >= 4.4.2",
       "python >= 3.9.0"
     ]
   },
@@ -1554,6 +1624,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "MathParser.org-mXparser": {
+            "target": "Package",
+            "version": "[4.4.2, )"
+          },
           "python": {
             "target": "Package",
             "version": "[3.9.0, )"
