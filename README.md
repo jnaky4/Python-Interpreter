@@ -7,7 +7,7 @@ We decided to use C# to write it because that is the language we have the most e
 
 ## Team Members
 
-- Jake Algoni
+- Jacob Alongi
 - Evan Buchanan
 - Levi Olson
 
