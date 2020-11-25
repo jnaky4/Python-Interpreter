@@ -4,7 +4,7 @@
 
 Our project was to design a simple Python interpreter. 
 We decided to use C# to write it because that is the language we have the most experience with and enjoy using the most.
-We used a couple of nuget libraries to help with our interpreter, most notably [mXparser](https://www.nuget.org/packages/MathParser.org-mXparser/4.4.2)
+We used a couple of NuGet libraries to help with our interpreter, most notably [mXparser](https://www.nuget.org/packages/MathParser.org-mXparser/4.4.2).
 
 ## Team Members
 

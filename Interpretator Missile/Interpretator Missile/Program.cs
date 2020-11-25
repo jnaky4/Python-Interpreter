@@ -48,6 +48,7 @@ namespace Interpretator_Missile
                     ourString = ourString.Substring(ourString.IndexOf("\"") + 1);
                     Console.WriteLine(ourString);
                 }
+                //Print function
 
                 Expression e = new Expression(ourString);
                 double x = e.calculate();
