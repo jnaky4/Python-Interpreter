@@ -5,26 +5,6 @@ namespace Interpretator_Missile
 {
     public static class Program
     {
-        static float PlusFloat(string num1, string num2)
-        {
-            float numA = float.Parse(num1);
-            float numB = float.Parse(num2);
-            return numA + numB;
-        }
-
-        static int PlusInt(string num1, string num2)
-        {
-            return int.Parse(num1) + int.Parse(num2);
-        }
-        public static bool IsInteger(this string s)
-        {
-            if (String.IsNullOrEmpty(s))
-                return false;
-
-            int i;
-            return Int32.TryParse(s, out i);
-        }
-
         static void Main(string[] args)
         {
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
@@ -71,9 +51,16 @@ namespace Interpretator_Missile
 
                 Expression e = new Expression(ourString);
                 double x = e.calculate();
+                
                 if (double.IsNaN(x) == false)
                 {
-                    Console.WriteLine(x.ToString());
+                    if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
+                    {
+                        if (x == 0) Console.WriteLine("False");
+                        else if (x == 1) Console.WriteLine("True");
+                        else Console.WriteLine(x.ToString());
+                    }
+                    else Console.WriteLine(x.ToString());
                 }
                 else if (ourString.Contains("%"))
                 {
@@ -85,7 +72,7 @@ namespace Interpretator_Missile
                         Console.WriteLine(y.ToString());
                     }
                 }
-                //Most of arithmatic is working, only one that is not is remainder.
+                //Most of arithmatic is working
             }
             
         }
