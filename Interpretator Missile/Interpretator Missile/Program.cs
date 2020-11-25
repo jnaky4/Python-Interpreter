@@ -7,16 +7,39 @@ namespace Interpretator_Missile
         static void Main(string[] args)
         {
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
+            int indentation = 0;
             while (true)
             {
-                string ourString = Console.ReadLine();
-                
-                if (ourString.Length > 3 && ourString.Substring(0, 4).CompareTo("exit") == 0) break;
-
-                if(ourString.Contains("#"))
+                Console.Write(">>>");
+                for (int i = 0; i < indentation; i++)
                 {
-                   ourString.Substring(0, ourString.IndexOf("#"));
+                    Console.Write(".");
                 }
+                for (int i = 0; i < indentation; i++)
+                {
+                    Console.Write("\t");
+                }
+                Console.Write(" ");
+                //formats the command line correctly for us
+                
+                string ourString = Console.ReadLine();
+                //gives us our string that the person wrote in
+
+                if (ourString.Contains("#"))
+                {
+                    ourString = ourString.Substring(0, ourString.IndexOf("#"));
+                }
+                //Comment functinallity
+
+                if (ourString.Contains("exit")) break;
+                //Ability to exit from the program
+
+                foreach(var s in ourString)
+                {
+                    if (s.CompareTo('\t') == 0) indentation++;
+                }
+                if (ourString.Length == 0) indentation = 0;
+                //Gives us correct indentation
             }
             
         }
