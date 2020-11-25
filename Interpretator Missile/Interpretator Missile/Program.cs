@@ -12,6 +12,11 @@ namespace Interpretator_Missile
                 string ourString = Console.ReadLine();
                 
                 if (ourString.Length > 3 && ourString.Substring(0, 4).CompareTo("exit") == 0) break;
+
+                if(ourString.Contains("#"))
+                {
+                   ourString.Substring(0, ourString.IndexOf("#"));
+                }
             }
             
         }
