@@ -75,6 +75,16 @@ namespace Interpretator_Missile
                 {
                     Console.WriteLine(x.ToString());
                 }
+                else if (ourString.Contains("%"))
+                {
+                    ourString = ourString.Replace('%', '#');
+                    Expression f = new Expression(ourString);
+                    double y = f.calculate();
+                    if (double.IsNaN(y) == false)
+                    {
+                        Console.WriteLine(y.ToString());
+                    }
+                }
                 //Most of arithmatic is working, only one that is not is remainder.
             }
             
