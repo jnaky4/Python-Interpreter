@@ -19,11 +19,11 @@ We had to implement various things for this interpreter:
 - `if`/`else` blocks
 - Variable Definitions
 - `while` and `for` loops
-- Arithmetic operators (`+`, `-`, `*`, `/`, `%`, `^`)
+- Arithmetic operators (`+`, `-`, `*`, `/`, `%`, `^`) (done)
 - Assignment operators (`=`, `+=`, `-=`, `*=`, `/=`, `^=`, `%=`)
-- Conditional statements (`<`, `<=`, `>`, `>=`, `==`, `!=`)
-- Comments, which are everything after `#`
-- The function `print`
+- Conditional statements (`<`, `<=`, `>`, `>=`, `==`, `!=`) (done)
+- Comments, which are everything after `#` (done)
+- The function `print` (done)
 
 ## How to use
 
