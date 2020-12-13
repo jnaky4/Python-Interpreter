@@ -1,10 +1,15 @@
 ﻿using org.mariuszgromada.math.mxparser;
+using System.Collections.Generic;
 using System;
 
 namespace Interpretator_Missile
 {
     public static class Program
     {
+        //variable containers (variable name, variable value)
+        static List<(string, double)> numbers = new List<(string, double)>();
+        static List<(string, string)> strings = new List<(string, string)>();
+
         static void Main(string[] args)
         {
             //Strip commenting
@@ -21,7 +26,6 @@ namespace Interpretator_Missile
 
 
             string[] key_words = {"while", "if", "elif", "else", "for"};
-
 
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
             int indentation = 0;
@@ -197,6 +201,7 @@ namespace Interpretator_Missile
                     assignment_split = ourString.Split("=");
                     //TODO CALL ASSIGNMENT
                     Console.WriteLine("found =");
+                    equals(assignment_split, strings, numbers);
                     break;
                 default: { } break;
             }
@@ -289,6 +294,105 @@ namespace Interpretator_Missile
         static bool LOOP(string ourString, string key_word, int tabs)
         {
             return true;
+        }
+
+        //gets the type of a variable entered into the command line
+        static string getType(string[] input)
+        {
+            string assignment = input[1].TrimStart(' ').TrimEnd(' ');
+
+            string type;
+            if (assignment.Contains("\""))
+                type = "String";
+            else
+                type = "Number";
+
+            return type;
+        }
+
+        //return -1 if the index isn't found, checks to see if variable is saved as a string
+        static int isString(List<(string, string)> strings, string name)
+        {
+            int index = 0;
+            foreach (var variable in strings)
+            {
+                if (variable.Item1 == name)
+                {
+                    return index;
+                }
+                index++;
+            }
+
+            return -1;
+        }
+
+        //return -1 if the index isn't found, checks to see if variable is saved as a double
+        static int isDouble(List<(string, double)> numbers, string name)
+        {
+            int index = 0;
+            foreach (var variable in numbers)
+            {
+                if (variable.Item1 == name)
+                {
+                    return index;
+                }
+                index++;
+            }
+
+            return -1;
+        }
+
+        //handles '=' operator
+        static void equals(string[] input, List<(string, string)> strings, List<(string, double)> numbers)
+        {
+            string name;
+            name = input[0].TrimEnd(' ');
+
+            string value = input[1].TrimStart(' ');
+            value = value.TrimEnd(' ');
+
+            int index;
+
+            if (getType(input) == "String")
+            {
+                value = value.TrimStart('\"').TrimEnd('\"');
+
+                index = isString(strings, name);
+
+                //the variable can be found in the list, update it
+                if (index != -1)
+                {
+                    Console.WriteLine("String already in list");
+                    Console.WriteLine("Old String " + name + " " + strings[index].Item2);
+                    Console.WriteLine("New String " + name + " " + value);
+                    strings[index] = (name, value);
+                    return;
+                }
+
+                Console.WriteLine("String " + name + " " + value);
+                strings.Add((name, value)); //need to create a new variable
+                return;
+            }
+            else
+            {
+                double num = Convert.ToDouble(value);
+
+                index = isDouble(numbers, name);
+
+                //the variable can be found in the list, update it
+                if (index != -1)
+                {
+                    Console.WriteLine("Double already in list");
+                    Console.WriteLine("Old Double " + name + " " + numbers[index].Item2);
+                    Console.WriteLine("New Double " + name + " " + num);
+                    numbers[index] = (name, num);
+                    return;
+                }
+
+                Console.WriteLine("Double " + name + " " + num);
+                numbers.Add((name, num));   //need to create a new variable
+                return;
+            }
         }
     }
 }
