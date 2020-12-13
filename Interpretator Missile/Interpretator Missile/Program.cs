@@ -234,21 +234,26 @@ namespace Interpretator_Missile
         //Conditional statements (<, <=, >, >=, ==, !=) 
         static bool Conditional_Statement(string[] split_at_condition, string condition)
         {
+            Console.WriteLine(condition);
+            Console.WriteLine(split_at_condition[0]);
+            Console.WriteLine(split_at_condition[1]);
             return true;
         }
         
         //Logical check (if, elif, else, while, for)
         static bool Logical_Statment(string ourString, string key_word, int tabs)
         {
-            string[] conditional_statements = { "<, <=, >, >=, ==, !=" };
+            string[] conditional_statements = { "<", "<=", ">", ">=", "==", "!=" };
             string[] split_at_condition;
             foreach(var condition in conditional_statements)
             {
                 if(ourString.Contains(condition)){
+                    Console.WriteLine("Logic Worked");
                     split_at_condition = ourString.Split(condition);
                     if (Conditional_Statement(split_at_condition, condition))
                     {
                         //CALL BLOCK STATEMENT METHOD
+                        //Console.WriteLine("Logic Worked");
                     }
                     else
                     {
@@ -258,9 +263,9 @@ namespace Interpretator_Missile
             }
 
             //DEBUG PRINTING
-            Console.WriteLine(key_word);
-            Console.WriteLine(ourString);
-            Console.WriteLine(tabs);
+            //Console.WriteLine(key_word);
+            //Console.WriteLine(ourString);
+            //Console.WriteLine(tabs);
             //DEBUG CONDITION
             return true;
         }
