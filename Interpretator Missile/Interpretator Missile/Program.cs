@@ -61,10 +61,11 @@ namespace Interpretator_Missile
 
 
 
-                //NEEDS TO COUNT TABS
+
+                //TODO NEEDS TO COUNT TABS
                 //CONDITIONAL STATEMENT*************
                 //while, for, if, elif, else
-                foreach(var s in key_words)
+                foreach (var s in key_words)
                 {
                     if (ourString.Contains(s))
                     {
@@ -87,33 +88,6 @@ namespace Interpretator_Missile
 
                     }
                 }
-                //***********************************
-
-
-                    /*                switch (ourString)
-                                    {
-                                        case string a when a.Contains("while"):
-                                            while_string = ourString.Substring(ourString.IndexOf("while"), );
-                                            break;
-                                        case string b when b.Contains("for"):
-                                            break;
-                                        case string c when c.Contains("if"):
-                                            break;
-                                        case string d when d.Contains("elif"):
-                                            break;
-                                        case string f when f.Contains("else"):
-                                            break;
-                                        case string g when g.Contains("print"):
-                                            break;
-                                    }*/
-
-
-
-
-
-
-
-
 
                 //EXIT*****************************
                 if (ourString == "exit") break;
@@ -172,19 +146,10 @@ namespace Interpretator_Missile
                 //******************************************
 
 
-                }
-
-/*                if (ourString.Contains("=") || ourString.Contains("==") )
-                {
-                    split by spaces into array
-                    string[] var_split = ourString.Split('=');
-                    foreach(var s in var_split)
-                    {
-
-                       } 
-                }*/
-
             }
+
+
+        }
 
         //Assignment operators (=, +=, -=, *=, /=, ^=, %=) 
         static void Assignment_Operator(string ourString, string key_word, int tabs)
@@ -201,29 +166,36 @@ namespace Interpretator_Missile
                 case string b when b.Contains("+="):
                     Console.WriteLine("found +=");
                     assignment_split = ourString.Split("+=");
+                    //TODO CALL ARITHMATIC
                     break;
-                case string a when a.Contains("-="):
+                case string c when c.Contains("-="):
                     Console.WriteLine("found -=");
                     assignment_split = ourString.Split("-=");
+                    //TODO CALL ARITHMATIC
                     break;
-                case string a when a.Contains("*="):
+                case string d when d.Contains("*="):
                     Console.WriteLine("found *=");
-                    assignment_split = ourString.Split("+=");
+                    assignment_split = ourString.Split("*=");
+                    //TODO CALL ARITHMATIC
                     break;
-                case string a when a.Contains("/="):
+                case string f when f.Contains("/="):
                     Console.WriteLine("found /=");
-                    assignment_split = ourString.Split("+=");
+                    assignment_split = ourString.Split("/=");
+                    //TODO CALL ARITHMATIC
                     break;
-                case string a when a.Contains("^="):
-                    assignment_split = ourString.Split("+=");
+                case string g when g.Contains("^="):
+                    assignment_split = ourString.Split("^=");
+                    //TODO CALL ARITHMATIC
                     Console.WriteLine("found ^=");
                     break;
-                case string a when a.Contains("%="):
+                case string h when h.Contains("%="):
                     assignment_split = ourString.Split("%=");
+                    //TODO CALL ARITHMATIC
                     Console.WriteLine("found %=");
                     break;
-                case string a when a.Contains("="):
+                case string i when i.Contains("="):
                     assignment_split = ourString.Split("=");
+                    //TODO CALL ASSIGNMENT
                     Console.WriteLine("found =");
                     break;
                 default: { } break;
@@ -232,33 +204,72 @@ namespace Interpretator_Missile
         }
 
         //Conditional statements (<, <=, >, >=, ==, !=) 
+        //split_at_condition is an array[2], split at condition
         static bool Conditional_Statement(string[] split_at_condition, string condition)
         {
+            split_at_condition[0] = split_at_condition[0].Trim();
+            split_at_condition[1] = split_at_condition[1].Trim();
+
+            switch (condition)
+            {
+                case ("<"):
+                    //TODO
+                    break;
+                case ("<="):
+                    //TODO
+                    break;
+                case (">"):
+                    //TODO
+                    break;
+                case (">="):
+                    //TODO
+                    //return split_at_condition[0] >= split_at_condition[1] ? true : false;
+                    break;
+                case ("=="):
+                    //TODO check if works
+                    return split_at_condition[0] == split_at_condition[1] ? true: false;
+                case ("!="):
+                    //TODO check if works
+                    return split_at_condition[0] != split_at_condition[1] ? true : false;
+            }
+
+
+            //DEBUG PRINTING
             Console.WriteLine(condition);
             Console.WriteLine(split_at_condition[0]);
             Console.WriteLine(split_at_condition[1]);
+            //DEBUG RETURN
             return true;
         }
         
         //Logical check (if, elif, else, while, for)
         static bool Logical_Statment(string ourString, string key_word, int tabs)
         {
-            string[] conditional_statements = { "<", "<=", ">", ">=", "==", "!=" };
+            ourString = ourString.Trim();
+            string[] conditional_statements = {"and", "or", "<", "<=", ">", ">=", "==", "!=" };
             string[] split_at_condition;
+
             foreach(var condition in conditional_statements)
             {
+                
                 if(ourString.Contains(condition)){
-                    Console.WriteLine("Logic Worked");
+                    //Console.WriteLine("Logic Worked");
+                    //split the string at the condition
                     split_at_condition = ourString.Split(condition);
-                    if (Conditional_Statement(split_at_condition, condition))
+                    if(condition == "and")
                     {
-                        //CALL BLOCK STATEMENT METHOD
-                        //Console.WriteLine("Logic Worked");
+                        //split ourString at condition and send both through this function again, if BOTH return true then return true
+                        return (Logical_Statment(split_at_condition[0], key_word, tabs) && Logical_Statment(split_at_condition[1], key_word, tabs)) ? true : false;
                     }
-                    else
+                    if(condition == "or")
                     {
-                        return false;
+                        //split ourString at condition and send both through this function again, if EITHER return true then return true
+                        return (Logical_Statment(split_at_condition[0], key_word, tabs) || Logical_Statment(split_at_condition[1], key_word, tabs)) ? true : false;
+
                     }
+                    //all other statements get passed to conditional statement function, returns boolean from conditional statement
+                    return Conditional_Statement(split_at_condition, condition) ? true : false;
+
                 }
             }
 
@@ -266,11 +277,15 @@ namespace Interpretator_Missile
             //Console.WriteLine(key_word);
             //Console.WriteLine(ourString);
             //Console.WriteLine(tabs);
-            //DEBUG CONDITION
+
+            //DEBUG RETURN
+            //TODO check value of itself
+            //No conditional operators, need to check value itself
             return true;
         }
 
         //while and for Loops 
+        //TODO
         static bool LOOP(string ourString, string key_word, int tabs)
         {
             return true;
