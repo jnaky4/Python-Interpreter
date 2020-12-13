@@ -8,11 +8,20 @@ namespace Interpretator_Missile
         static void Main(string[] args)
         {
             //Strip commenting
-            //if, while, else, elif terminator ':'
+            //SWITCH: if, while, else, elif, for  ----> all have terminator ':'
             //and or statements to split on
             //
+            /*
+                Steps for Breaking down a line of code:
+                1) strip commenting
+                2) strip on key words
+                3) 
+             
+             */
 
-            string[] key_words = { "print", "while", "if", "elif", "else", "and","or", "break", "for", "in"};
+
+            string[] key_words = {"while", "if", "elif", "else", "for"};
+
 
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
             int indentation = 0;
@@ -52,6 +61,54 @@ namespace Interpretator_Missile
 
 
 
+                //NEEDS TO COUNT TABS
+                //CONDITIONAL STATEMENT*************
+                //while, for, if, elif, else
+                foreach(var s in key_words)
+                {
+                    if (ourString.Contains(s))
+                    {
+                        if (!(ourString[ourString.Length-1] == ':'))
+                        {
+                            //ERROR
+                            Console.WriteLine("Missing :");
+                        }
+                        else
+                        {
+                            //Grab the keyword
+                            string key_word = s;
+                            int length = ourString.IndexOf(s) + s.Length;
+                            //Split between keyword and : 
+                            string comparison = ourString.Substring(length);
+                            comparison = comparison.Substring(0, comparison.Length - 1);
+                            Logical_Statment(comparison, s, 0);
+                            
+                        }
+
+                    }
+                }
+                //***********************************
+
+
+                    /*                switch (ourString)
+                                    {
+                                        case string a when a.Contains("while"):
+                                            while_string = ourString.Substring(ourString.IndexOf("while"), );
+                                            break;
+                                        case string b when b.Contains("for"):
+                                            break;
+                                        case string c when c.Contains("if"):
+                                            break;
+                                        case string d when d.Contains("elif"):
+                                            break;
+                                        case string f when f.Contains("else"):
+                                            break;
+                                        case string g when g.Contains("print"):
+                                            break;
+                                    }*/
+
+
+
 
 
 
@@ -59,7 +116,7 @@ namespace Interpretator_Missile
 
 
                 //EXIT*****************************
-                if (ourString.Contains("exit")) break;
+                if (ourString == "exit") break;
                 //Ability to exit from the program
                 //**********************************
 
@@ -115,47 +172,8 @@ namespace Interpretator_Missile
                 //******************************************
 
 
-                //ASSIGNMENT OPERATORS********************
-                string[] assignment_split;
-                switch(ourString)
-                {
-
-                    case string a when a.Contains("=="):
-                        Console.WriteLine("found ==");
-                        assignment_split = ourString.Split("==");
-                        break;
-                    case string b when b.Contains("+="):
-                        Console.WriteLine("found +=");
-                        assignment_split = ourString.Split("+=");
-                        break;
-                    case string a when a.Contains("-="):
-                        Console.WriteLine("found -=");
-                        assignment_split = ourString.Split("-=");
-                        break;
-                    case string a when a.Contains("*="):
-                        Console.WriteLine("found *=");
-                        assignment_split = ourString.Split("+=");
-                        break;
-                    case string a when a.Contains("/="):
-                        Console.WriteLine("found /=");
-                        assignment_split = ourString.Split("+=");
-                        break;
-                    case string a when a.Contains("^="):
-                        assignment_split = ourString.Split("+=");
-                        Console.WriteLine("found ^=");
-                        break;
-                    case string a when a.Contains("%="):
-                        assignment_split = ourString.Split("%=");
-                        Console.WriteLine("found %=");
-                        break;
-                    case string a when a.Contains("="):
-                        assignment_split = ourString.Split("=");
-                        Console.WriteLine("found =");
-                        break;
-                    default: {} break;
-
-
                 }
+
 /*                if (ourString.Contains("=") || ourString.Contains("==") )
                 {
                     split by spaces into array
@@ -168,6 +186,89 @@ namespace Interpretator_Missile
 
             }
 
+        //Assignment operators (=, +=, -=, *=, /=, ^=, %=) 
+        static void Assignment_Operator(string ourString, string key_word, int tabs)
+        {
+            string[] assignment_split;
+            switch (ourString)
+            {
+
+                case string a when a.Contains("=="):
+                    Console.WriteLine("found ==");
+                    assignment_split = ourString.Split("==");
+
+                    break;
+                case string b when b.Contains("+="):
+                    Console.WriteLine("found +=");
+                    assignment_split = ourString.Split("+=");
+                    break;
+                case string a when a.Contains("-="):
+                    Console.WriteLine("found -=");
+                    assignment_split = ourString.Split("-=");
+                    break;
+                case string a when a.Contains("*="):
+                    Console.WriteLine("found *=");
+                    assignment_split = ourString.Split("+=");
+                    break;
+                case string a when a.Contains("/="):
+                    Console.WriteLine("found /=");
+                    assignment_split = ourString.Split("+=");
+                    break;
+                case string a when a.Contains("^="):
+                    assignment_split = ourString.Split("+=");
+                    Console.WriteLine("found ^=");
+                    break;
+                case string a when a.Contains("%="):
+                    assignment_split = ourString.Split("%=");
+                    Console.WriteLine("found %=");
+                    break;
+                case string a when a.Contains("="):
+                    assignment_split = ourString.Split("=");
+                    Console.WriteLine("found =");
+                    break;
+                default: { } break;
+            }
+        return;
+        }
+
+        //Conditional statements (<, <=, >, >=, ==, !=) 
+        static bool Conditional_Statement(string[] split_at_condition, string condition)
+        {
+            return true;
+        }
+        
+        //Logical check (if, elif, else, while, for)
+        static bool Logical_Statment(string ourString, string key_word, int tabs)
+        {
+            string[] conditional_statements = { "<, <=, >, >=, ==, !=" };
+            string[] split_at_condition;
+            foreach(var condition in conditional_statements)
+            {
+                if(ourString.Contains(condition)){
+                    split_at_condition = ourString.Split(condition);
+                    if (Conditional_Statement(split_at_condition, condition))
+                    {
+                        //CALL BLOCK STATEMENT METHOD
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            //DEBUG PRINTING
+            Console.WriteLine(key_word);
+            Console.WriteLine(ourString);
+            Console.WriteLine(tabs);
+            //DEBUG CONDITION
+            return true;
+        }
+
+        //while and for Loops 
+        static bool LOOP(string ourString, string key_word, int tabs)
+        {
+            return true;
         }
     }
 }
