@@ -93,6 +93,9 @@ namespace Interpretator_Missile
                     }
                 }
 
+                Assignment_Statement(ourString, null, 0);
+                //Assignment_Operator(ourString, null, 0);
+
                 //EXIT*****************************
                 if (ourString == "exit") break;
                 //Ability to exit from the program
@@ -155,57 +158,65 @@ namespace Interpretator_Missile
 
         }
 
-        //Assignment operators (=, +=, -=, *=, /=, ^=, %=) 
-        static void Assignment_Operator(string ourString, string key_word, int tabs)
+        //splits the statement based on assignment operator
+        //Assignment operators (=, +=, -=, *=, /=, ^=, %=)
+        static void Assignment_Statement(string ourString, string keyword, int tabs)
         {
-            string[] assignment_split;
-            switch (ourString)
+            ourString = ourString.Trim();
+            string[] assignment_operators = { "+=", "-=", "*=", "/=", "^=", "%="};
+            string[] split_at_operator;
+
+            foreach (var assignment in assignment_operators)
             {
-
-                case string a when a.Contains("=="):
-                    Console.WriteLine("found ==");
-                    assignment_split = ourString.Split("==");
-
-                    break;
-                case string b when b.Contains("+="):
-                    Console.WriteLine("found +=");
-                    assignment_split = ourString.Split("+=");
-                    //TODO CALL ARITHMATIC
-                    break;
-                case string c when c.Contains("-="):
-                    Console.WriteLine("found -=");
-                    assignment_split = ourString.Split("-=");
-                    //TODO CALL ARITHMATIC
-                    break;
-                case string d when d.Contains("*="):
-                    Console.WriteLine("found *=");
-                    assignment_split = ourString.Split("*=");
-                    //TODO CALL ARITHMATIC
-                    break;
-                case string f when f.Contains("/="):
-                    Console.WriteLine("found /=");
-                    assignment_split = ourString.Split("/=");
-                    //TODO CALL ARITHMATIC
-                    break;
-                case string g when g.Contains("^="):
-                    assignment_split = ourString.Split("^=");
-                    //TODO CALL ARITHMATIC
-                    Console.WriteLine("found ^=");
-                    break;
-                case string h when h.Contains("%="):
-                    assignment_split = ourString.Split("%=");
-                    //TODO CALL ARITHMATIC
-                    Console.WriteLine("found %=");
-                    break;
-                case string i when i.Contains("="):
-                    assignment_split = ourString.Split("=");
-                    //TODO CALL ASSIGNMENT
-                    Console.WriteLine("found =");
-                    equals(assignment_split, strings, numbers);
-                    break;
-                default: { } break;
+                if (ourString.Contains(assignment))
+                {
+                    split_at_operator = ourString.Split(assignment);
+                    Assignment_Operator(split_at_operator, assignment);
+                    return;
+                }
             }
-        return;
+
+            //special case for "=" operator
+            if (ourString.Contains("=") && !ourString.Contains("=="))
+            {
+                split_at_operator = ourString.Split("=");
+                Assignment_Operator(split_at_operator, "=");
+            }
+        }
+
+        //handles each of the assignment operators
+        static void Assignment_Operator(string[] split_at_operator, string assignment)
+        {
+            string variable = split_at_operator[0].Trim();
+            string value = split_at_operator[1].Trim();
+
+            switch (assignment)
+            {
+                case ("+="):
+                    //TODO
+                    break;
+                case ("-="):
+                    //TODO
+                    break;
+                case ("*="):
+                    //TODO
+                    break;
+                case ("/="):
+                    Console.WriteLine("found /=");
+                    //TODO
+                    break;
+                case ("^="):
+                    //TODO
+                    break;
+                case ("%="):
+                    //TODO
+                    break;
+                case ("="):
+                    //TODO
+                    Console.WriteLine("found = ");
+                    Console.WriteLine("Variable: " + variable + value);
+                    break;
+            }
         }
 
         //Conditional statements (<, <=, >, >=, ==, !=) 
@@ -296,10 +307,16 @@ namespace Interpretator_Missile
             return true;
         }
 
+        //gets the name of the variable
+        static string getName(string[] input)
+        {
+            return input[0].TrimEnd();
+        }
+
         //gets the type of a variable entered into the command line
         static string getType(string[] input)
         {
-            string assignment = input[1].TrimStart(' ').TrimEnd(' ');
+            string assignment = input[1].Trim();
 
             string type;
             if (assignment.Contains("\""))
@@ -342,20 +359,27 @@ namespace Interpretator_Missile
             return -1;
         }
 
+        static void plusEquals(string[] input, List<(string, string)> strings, List<(string, double)> numbers)
+        {
+            string name = getName(input);
+
+            int index;
+
+            index = isString(strings, name);
+        }
+
         //handles '=' operator
         static void equals(string[] input, List<(string, string)> strings, List<(string, double)> numbers)
         {
-            string name;
-            name = input[0].TrimEnd(' ');
+            string name = getName(input);
 
-            string value = input[1].TrimStart(' ');
-            value = value.TrimEnd(' ');
+            string value = input[1].Trim();
 
             int index;
 
             if (getType(input) == "String")
             {
-                value = value.TrimStart('\"').TrimEnd('\"');
+                value = value.Trim('\"');
 
                 index = isString(strings, name);
 
