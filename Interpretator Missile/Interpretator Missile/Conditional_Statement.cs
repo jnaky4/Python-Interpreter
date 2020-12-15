@@ -8,41 +8,59 @@ namespace Interpretator_Missile
     {
         //Conditional statements (<, <=, >, >=, ==, !=)
         //split_at_condition is an array[2], split at condition
-        public static bool Conditional_Statement(string[] split_at_condition, string condition)
+        public static bool Conditional_Statement(string[] split, string condition, List<(string, double)> numbers, List<(string, string)> strings)
         {
-            split_at_condition[0] = split_at_condition[0].Trim();
-            split_at_condition[1] = split_at_condition[1].Trim();
-            //if (numbers.Contains(split_at_condition[0]))
-            switch (condition)
+            bool statement = false;
+            double x = 0, y = 0;
+
+            if (double.IsNaN(double.Parse(split[0])) == false) x = double.Parse(split[0]);
+            else
             {
-                case ("<"):
-                    //TODO
-                    break;
-                case ("<="):
-                    //TODO
-                    break;
-                case (">"):
-                    //TODO
-                    break;
-                case (">="):
-                    //TODO
-                    //return split_at_condition[0] >= split_at_condition[1] ? true : false;
-                    break;
-                case ("=="):
-                    //TODO check if works
-                    return split_at_condition[0] == split_at_condition[1] ? true : false;
-                case ("!="):
-                    //TODO check if works
-                    return split_at_condition[0] != split_at_condition[1] ? true : false;
+                foreach (var s in numbers)
+                {
+                    if (split[0].Contains(s.Item1))
+                    {
+                        x = s.Item2;
+                    }
+                }
+            }
+            if (double.IsNaN(double.Parse(split[1])) == false) y = double.Parse(split[1]);
+            else
+            {
+                foreach (var s in numbers)
+                {
+                    if (split[1].Contains(s.Item1))
+                    {
+                        y = s.Item2;
+                    }
+                }
             }
 
-
-            //DEBUG PRINTING
-            Console.WriteLine(condition);
-            Console.WriteLine(split_at_condition[0]);
-            Console.WriteLine(split_at_condition[1]);
-            //DEBUG RETURN
-            return true;
+            switch (condition)
+            {
+                case "<":
+                    statement = x < y;
+                    break;
+                case "<=":
+                    statement = x <= y;
+                    break;
+                case ">":
+                    statement = x > y;
+                    break;
+                case ">=":
+                    statement = x > y;
+                    break;
+                case "==":
+                    statement = x == y;
+                    break;
+                case "!=":
+                    statement = x != y;
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine("x: " + x + "y: " + y + "condition: " + condition + statement);
+            return statement;
         }
     }
 }
