@@ -59,7 +59,7 @@ namespace Interpretator_Missile
                 default:
                     break;
             }
-            Console.WriteLine("x: " + x + "y: " + y + "condition: " + condition + statement);
+            Console.WriteLine("x: " + x + " y: " + y + " condition: " + condition + " " + statement);
             return statement;
         }
     }
