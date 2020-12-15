@@ -87,7 +87,7 @@ namespace Interpretator_Missile
                             //Split between keyword and : 
                             string comparison = ourString.Substring(length);
                             comparison = comparison.Substring(0, comparison.Length - 1);
-                            Logical_Statment(comparison, s, 0);
+                            Logical_Statment(comparison, s, 0, numbers, strings);
                             
                         }
 
