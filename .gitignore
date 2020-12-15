@@ -7,3 +7,8 @@
 **/.vs/*
 **/bin/*
 **/obj/*
+Interpretator\ Missile/*
+Interpretator\ Missile/Interpretator\ Missile/bin/*
+Interpretator\ Missile/Interpretator\ Missile/obj/*
+Interpretator\ Missile/Interpretator\ Missile/bin/Debug/netcoreapp3.1/*
+Interpretator\ Missile/Interpretator\ Missile/obj/Debug/netcoreapp3.1/*
