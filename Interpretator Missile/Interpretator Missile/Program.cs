@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System;
 using static Program.Print;
-using Program;
 
 namespace Interpretator_Missile
 {
