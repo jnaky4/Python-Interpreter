@@ -48,7 +48,7 @@ namespace Interpretator_Missile
                     statement = x > y;
                     break;
                 case ">=":
-                    statement = x > y;
+                    statement = x >= y;
                     break;
                 case "==":
                     statement = x == y;

@@ -92,7 +92,7 @@ namespace Interpretator_Missile
                             //Split between keyword and : 
                             string comparison = ourString.Substring(length);
                             comparison = comparison.Substring(0, comparison.Length - 1);
-                            bool logic_evaluated = Logical_Statment(comparison, s, 0);
+                            bool logic_evaluated = Logical_Statment(comparison, s, 0, numbers, strings);
 
                             //Logic is evaluated, if it returns true, go into next block of code
                             if (logic_evaluated)
@@ -101,7 +101,6 @@ namespace Interpretator_Missile
                                 in_loop = true;
                             }
                         }
-
                     }
                 }
 
