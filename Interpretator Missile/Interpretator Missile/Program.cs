@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System;
 using static Interpretator_Missile.Print;
 using static Interpretator_Missile.Assignment;
+using static Interpretator_Missile.Logical_Statement;
+using static Interpretator_Missile.Conditional_Statements;
 
 namespace Interpretator_Missile
 {
@@ -155,87 +157,8 @@ namespace Interpretator_Missile
 
         }
 
-        //Conditional statements (<, <=, >, >=, ==, !=)
-        //split_at_condition is an array[2], split at condition
-        static bool Conditional_Statement(string[] split_at_condition, string condition)
-        {
-            split_at_condition[0] = split_at_condition[0].Trim();
-            split_at_condition[1] = split_at_condition[1].Trim();
-            //if (numbers.Contains(split_at_condition[0]))
-            switch (condition)
-            {
-                case ("<"):
-                    //TODO
-                    break;
-                case ("<="):
-                    //TODO
-                    break;
-                case (">"):
-                    //TODO
-                    break;
-                case (">="):
-                    //TODO
-                    //return split_at_condition[0] >= split_at_condition[1] ? true : false;
-                    break;
-                case ("=="):
-                    //TODO check if works
-                    return split_at_condition[0] == split_at_condition[1] ? true: false;
-                case ("!="):
-                    //TODO check if works
-                    return split_at_condition[0] != split_at_condition[1] ? true : false;
-            }
 
-
-            //DEBUG PRINTING
-            Console.WriteLine(condition);
-            Console.WriteLine(split_at_condition[0]);
-            Console.WriteLine(split_at_condition[1]);
-            //DEBUG RETURN
-            return true;
-        }
-        
-        //Logical check (if, elif, else, while, for)
-        static bool Logical_Statment(string ourString, string key_word, int tabs)
-        {
-            ourString = ourString.Trim();
-            string[] conditional_statements = {"and", "or", "<", "<=", ">", ">=", "==", "!=" };
-            string[] split_at_condition;
-
-            foreach(var condition in conditional_statements)
-            {
-                
-                if(ourString.Contains(condition)){
-                    //Console.WriteLine("Logic Worked");
-                    //split the string at the condition
-                    split_at_condition = ourString.Split(condition);
-                    if(condition == "and")
-                    {
-                        //split ourString at condition and send both through this function again, if BOTH return true then return true
-                        return (Logical_Statment(split_at_condition[0], key_word, tabs) && Logical_Statment(split_at_condition[1], key_word, tabs)) ? true : false;
-                    }
-                    if(condition == "or")
-                    {
-                        //split ourString at condition and send both through this function again, if EITHER return true then return true
-                        return (Logical_Statment(split_at_condition[0], key_word, tabs) || Logical_Statment(split_at_condition[1], key_word, tabs)) ? true : false;
-
-                    }
-                    //all other statements get passed to conditional statement function, returns boolean from conditional statement
-                    return Conditional_Statement(split_at_condition, condition);
-
-                }
-            }
-
-            //DEBUG PRINTING
-            //Console.WriteLine(key_word);
-            //Console.WriteLine(ourString);
-            //Console.WriteLine(tabs);
-
-            //DEBUG RETURN
-            //TODO check value of itself
-            //No conditional operators, need to check value itself
-            return true;
-        }
-
+       
         //while and for Loops 
         //TODO
         static bool LOOP(string ourString, string key_word, int tabs)
