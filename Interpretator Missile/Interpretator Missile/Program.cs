@@ -34,7 +34,7 @@ namespace Interpretator_Missile
              */
 
 
-            string[] key_words = {"while", "if", "elif", "else", "for"};
+            string[] key_words = { "while", "if", "elif", "else", "for" };
 
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
             int indentation = 0;
@@ -79,7 +79,7 @@ namespace Interpretator_Missile
                 {
                     if (ourString.Contains(s))
                     {
-                        if (!(ourString[ourString.Length-1] == ':'))
+                        if (!(ourString[ourString.Length - 1] == ':'))
                         {
                             //ERROR
                             Console.WriteLine("Missing :");
@@ -101,11 +101,17 @@ namespace Interpretator_Missile
                                 in_loop = true;
                             }
                         }
+
                     }
                 }
 
-                Assignment_Statement(ourString, null, 0, strings, numbers);
-                //Assignment_Operator(ourString, null, 0, strings, numbers);
+                if (!in_loop)
+                {
+                    Console.WriteLine("Not in LOOP");
+                    Assignment_Statement(ourString, null, 0, strings, numbers);
+                    //Assignment_Operator(ourString, null, 0, strings, numbers);
+                }
+
 
                 //EXIT*****************************
                 if (ourString == "exit") break;
@@ -115,7 +121,7 @@ namespace Interpretator_Missile
 
 
                 //TAB COUNTING**********************
-                foreach(var s in ourString)
+                foreach (var s in ourString)
                 {
                     if (s.CompareTo('\t') == 0) indentation++;
                 }
@@ -136,8 +142,8 @@ namespace Interpretator_Missile
                 //MATH*********************************
                 Expression e = new Expression(ourString);
                 double x = e.calculate();
-                
-                
+
+
                 if (double.IsNaN(x) == false)
                 {
                     /*if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
@@ -168,7 +174,7 @@ namespace Interpretator_Missile
         }
 
 
-       
+
         //while and for Loops 
         //TODO
         static bool LOOP(string ourString, string key_word, int tabs)
@@ -176,6 +182,6 @@ namespace Interpretator_Missile
             return true;
         }
 
-        
+
     }
 }

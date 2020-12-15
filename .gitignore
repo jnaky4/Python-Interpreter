@@ -1,2 +1,7 @@
 /*
 !.gitignore
+*.json
+*.props
+*.json
+*.cache
+*.cache
