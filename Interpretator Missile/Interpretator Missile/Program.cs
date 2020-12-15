@@ -1,7 +1,8 @@
 ﻿using org.mariuszgromada.math.mxparser;
 using System.Collections.Generic;
 using System;
-using static Program.Print;
+using static Interpretator_Missile.Print;
+using static Interpretator_Missile.Assignment;
 
 namespace Interpretator_Missile
 {
@@ -91,8 +92,8 @@ namespace Interpretator_Missile
                     }
                 }
 
-                Assignment_Statement(ourString, null, 0);
-                //Assignment_Operator(ourString, null, 0);
+                Assignment_Statement(ourString, null, 0, strings, numbers);
+                //Assignment_Operator(ourString, null, 0, strings, numbers);
 
                 //EXIT*****************************
                 if (ourString == "exit") break;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static Interpretator_Missile.Assignment;
 
 namespace Interpretator_Missile
 {
@@ -33,8 +34,8 @@ namespace Interpretator_Missile
 
                     }
                     //all other statements get passed to conditional statement function, returns boolean from conditional statement
-                    return Conditional_Statement(split_at_condition, condition);
-
+                    //return Conditional_Statement(split_at_condition, condition);
+                    return false;
                 }
             }
 

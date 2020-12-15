@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Program
+namespace Interpretator_Missile
 {
-    internal class Print
+    class Print
     {
         public static void PrintFunction(string ourString, List<(string, double)> numbers, List<(string, string)> strings)
         {
