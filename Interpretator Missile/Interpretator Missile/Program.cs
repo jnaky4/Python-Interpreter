@@ -10,9 +10,14 @@ namespace Interpretator_Missile
 {
     public static class Program
     {
+
         //variable containers (variable name, variable value)
         static List<(string, double)> numbers = new List<(string, double)>();
         static List<(string, string)> strings = new List<(string, string)>();
+
+        static bool in_loop = false;
+        static int current_tab = 0;
+
 
         static void Main(string[] args)
         {
@@ -87,8 +92,14 @@ namespace Interpretator_Missile
                             //Split between keyword and : 
                             string comparison = ourString.Substring(length);
                             comparison = comparison.Substring(0, comparison.Length - 1);
-                            Logical_Statment(comparison, s, 0);
-                            
+                            bool logic_evaluated = Logical_Statment(comparison, s, 0);
+
+                            //Logic is evaluated, if it returns true, go into next block of code
+                            if (logic_evaluated)
+                            {
+                                current_tab = 1;
+                                in_loop = true;
+                            }
                         }
 
                     }
