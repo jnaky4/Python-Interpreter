@@ -2,6 +2,8 @@
 !.gitignore
 *.json
 *.props
-*.json
 *.cache
-*.cache
+.vs/*
+**/.vs/*
+**/bin/*
+**/obj/*
