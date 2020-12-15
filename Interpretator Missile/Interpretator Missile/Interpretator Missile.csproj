@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="MathParser.org-mXparser" Version="4.4.2" />
     <PackageReference Include="python" Version="3.9.0" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

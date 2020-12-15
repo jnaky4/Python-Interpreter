@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "34V9q8r5gAMt0+6nkF8NY3U09et7f2K+UeP5mOk4N2hDwG9u6CYsbtyKF06tO8beTzoOVt2Azcsz+sRUuDxkJQ==",
+  "dgSpecHash": "wm6Bz+k+XvBsCdFIyttYNP/8L9tF9wu0Ih4i1qvX2s5mB2y31gIWzJxGcDx7lmr+mv7QcHQvtvlPcOANlRo/gQ==",
   "success": true,
   "projectFilePath": "F:\\source\\repos\\Python-Interpreter\\Interpretator Missile\\Interpretator Missile\\Interpretator Missile.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\esb54\\.nuget\\packages\\mathparser.org-mxparser\\4.4.2\\mathparser.org-mxparser.4.4.2.nupkg.sha512",
-    "C:\\Users\\esb54\\.nuget\\packages\\python\\3.9.0\\python.3.9.0.nupkg.sha512"
+    "C:\\Users\\esb54\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\esb54\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\esb54\\.nuget\\packages\\python\\3.9.0\\python.3.9.0.nupkg.sha512",
+    "C:\\Users\\esb54\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\esb54\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

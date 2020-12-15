@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[4.4.2, )"
             },
+            "System.Collections": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "python": {
               "target": "Package",
               "version": "[3.9.0, )"

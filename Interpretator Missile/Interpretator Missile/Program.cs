@@ -1,6 +1,8 @@
 ﻿using org.mariuszgromada.math.mxparser;
 using System.Collections.Generic;
 using System;
+using static Program.Print;
+using Program;
 
 namespace Interpretator_Missile
 {
@@ -32,9 +34,6 @@ namespace Interpretator_Missile
 
             while (true)
             {
-
-
-
                 //Write To Console****************
                 Console.Write(">>>");
                 for (int i = 0; i < indentation; i++)
@@ -114,11 +113,9 @@ namespace Interpretator_Missile
 
 
                 //PRINTING*****************************
-                if (ourString.Contains("print(\"") && ourString.Contains("\")"))
+                if (ourString.Contains("print("))
                 {
-                    ourString = ourString.Substring(ourString.IndexOf("print(\""), ourString.IndexOf("\")"));
-                    ourString = ourString.Substring(ourString.IndexOf("\"") + 1);
-                    Console.WriteLine(ourString);
+                    PrintFunction(ourString, numbers, strings);
                 }
                 //Print function
                 //*************************************
@@ -131,13 +128,13 @@ namespace Interpretator_Missile
                 
                 if (double.IsNaN(x) == false)
                 {
-                    if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
+                    /*if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
                     {
                         if (x == 0) Console.WriteLine("False");
                         else if (x == 1) Console.WriteLine("True");
                         else Console.WriteLine(x.ToString());
                     }
-                    else Console.WriteLine(x.ToString());
+                    else Console.WriteLine(x.ToString());*/
                 }
                 else if (ourString.Contains("%"))
                 {
@@ -219,13 +216,13 @@ namespace Interpretator_Missile
             }
         }
 
-        //Conditional statements (<, <=, >, >=, ==, !=) 
+        //Conditional statements (<, <=, >, >=, ==, !=)
         //split_at_condition is an array[2], split at condition
         static bool Conditional_Statement(string[] split_at_condition, string condition)
         {
             split_at_condition[0] = split_at_condition[0].Trim();
             split_at_condition[1] = split_at_condition[1].Trim();
-
+            //if (numbers.Contains(split_at_condition[0]))
             switch (condition)
             {
                 case ("<"):
@@ -284,7 +281,7 @@ namespace Interpretator_Missile
 
                     }
                     //all other statements get passed to conditional statement function, returns boolean from conditional statement
-                    return Conditional_Statement(split_at_condition, condition) ? true : false;
+                    return Conditional_Statement(split_at_condition, condition);
 
                 }
             }
