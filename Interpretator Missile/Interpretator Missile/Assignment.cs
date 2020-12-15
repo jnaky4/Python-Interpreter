@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using org.mariuszgromada.math.mxparser;
 
 namespace Interpretator_Missile
 {
@@ -24,7 +25,7 @@ namespace Interpretator_Missile
             }
 
             //special case for "=" operator
-            if (ourString.Contains("=") && !ourString.Contains("=="))
+            if (ourString.Contains("=") && !ourString.Contains("==") && !ourString.Contains(">=") && !ourString.Contains("<=") && !ourString.Contains("!="))
             {
                 split_at_operator = ourString.Split("=");
                 Assignment_Operator(split_at_operator, "=", strings, numbers);
@@ -36,6 +37,8 @@ namespace Interpretator_Missile
         {
             string variable = split_at_operator[0].Trim();
             string value = split_at_operator[1].Trim();
+            (string, int) type = getType(variable, strings, numbers);
+            //Console.WriteLine("Variable type: " + type.Item1 + " index: " + type.Item2);
 
             switch (assignment)
             {
@@ -49,7 +52,7 @@ namespace Interpretator_Missile
                     //TODO
                     break;
                 case ("/="):
-                    Console.WriteLine("found /=");
+                    //Console.WriteLine("found /=");
                     //TODO
                     break;
                 case ("^="):
@@ -60,31 +63,25 @@ namespace Interpretator_Missile
                     break;
                 case ("="):
                     //TODO
-                    Console.WriteLine("found = ");
-                    Console.WriteLine("Variable: " + variable + value);
-                    equals(variable, value, strings, numbers);
+                    //Console.WriteLine("found = ");
+                    equals(variable, value, strings, numbers, type);
                     break;
             }
         }
 
-        //gets the name of the variable
-        public static string getName(string[] input)
+        //gets the type of a variable and the index it is stored in
+        public static (string, int) getType(string variable, List<(string, string)> strings, List<(string, double)> numbers)
         {
-            return input[0].TrimEnd();
-        }
+            int index;
+            index = isString(strings, variable);
+            if (index != -1)
+                return ("string", index);
 
-        //gets the type of a variable entered into the command line
-        public static string getType(string assignment)
-        {
-            //string assignment = input[1].Trim();
-
-            string type;
-            if (assignment.Contains("\""))
-                type = "String";
+            index = isDouble(numbers, variable);
+            if (index != -1)
+                return ("number", index);
             else
-                type = "Number";
-
-            return type;
+                return (null, index);
         }
 
         //return -1 if the index isn't found, checks to see if variable is saved as a string
@@ -119,32 +116,38 @@ namespace Interpretator_Missile
             return -1;
         }
 
-        public static void plusEquals(string[] input, List<(string, string)> strings, List<(string, double)> numbers)
-        {
-            string name = getName(input);
-
-            int index;
-
-            index = isString(strings, name);
-        }
-
         //handles '=' operator
-        public static void equals(string variable, string value, List<(string, string)> strings, List<(string, double)> numbers)
+        public static void equals(string variable, string value, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
         {
-            if (getType(value) == "String")
+            Expression e = new Expression(value);
+            double num = e.calculate();
+
+            if (double.IsNaN(num) == true)
             {
+                //new variable needs to be added to the list
+                if (type.Item2 == -1)
+                {
+                    strings.Add((variable, value));
+                    return;
+                }
+                else
+                {
+                    //matching types
+                    if (type.Item1 == "string")
+                    {
+
+                    }
+                }
+
                 strings.Add((variable, value));
-                Console.WriteLine("Number " + variable + " = " + value);
+                //Console.WriteLine("String " + variable + " = " + value);
                 return;
             }
             else
-            {
-                double num = Convert.ToDouble(value);
-
+            { 
                 numbers.Add((variable, num));
 
-                Console.WriteLine("Number " + variable + " = " + value);
-
+                //Console.WriteLine("Number " + variable + " = " + num);
                 return;
             }
         }
