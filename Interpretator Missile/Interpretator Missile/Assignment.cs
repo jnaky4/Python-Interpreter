@@ -132,10 +132,17 @@ namespace Interpretator_Missile
                 }
                 else
                 {
-                    //matching types
+                    //matching types need to update old value
                     if (type.Item1 == "string")
                     {
-
+                        strings[type.Item2] = (variable, value);
+                        return;
+                    }
+                    if (type.Item1 == "number")
+                    {
+                        numbers.Remove(numbers[type.Item2]);
+                        strings.Add((variable, value));
+                        return;
                     }
                 }
 
@@ -144,63 +151,30 @@ namespace Interpretator_Missile
                 return;
             }
             else
-            { 
-                numbers.Add((variable, num));
-
+            {
+                //new variable needs to be added to the list
+                if (type.Item2 == -1)
+                {
+                    numbers.Add((variable, num));
+                    return;
+                }
+                else
+                {
+                    if (type.Item1 == "number")
+                    {
+                        numbers[type.Item2] = (variable, num);
+                        return;
+                    }
+                    if (type.Item1 == "string")
+                    {
+                        strings.Remove(strings[type.Item2]);
+                        numbers.Add((variable, num));
+                        return;
+                    }
+                }
                 //Console.WriteLine("Number " + variable + " = " + num);
                 return;
             }
         }
     }
-
-    //handles '=' operator
-    /*static void equals1(string[] input, List<(string, string)> strings, List<(string, double)> numbers)
-    {
-        string name = getName(input);
-
-        string value = input[1].Trim();
-
-        int index;
-
-        if (getType(input) == "String")
-        {
-            value = value.Trim('\"');
-
-            index = isString(strings, name);
-
-            //the variable can be found in the list, update it
-            if (index != -1)
-            {
-                Console.WriteLine("String already in list");
-                Console.WriteLine("Old String " + name + " " + strings[index].Item2);
-                Console.WriteLine("New String " + name + " " + value);
-                strings[index] = (name, value);
-                return;
-            }
-
-            Console.WriteLine("String " + name + " " + value);
-            strings.Add((name, value)); //need to create a new variable
-            return;
-        }
-        else
-        {
-            double num = Convert.ToDouble(value);
-
-            index = isDouble(numbers, name);
-
-            //the variable can be found in the list, update it
-            if (index != -1)
-            {
-                Console.WriteLine("Double already in list");
-                Console.WriteLine("Old Double " + name + " " + numbers[index].Item2);
-                Console.WriteLine("New Double " + name + " " + num);
-                numbers[index] = (name, num);
-                return;
-            }
-
-            Console.WriteLine("Double " + name + " " + num);
-            numbers.Add((name, num));   //need to create a new variable
-            return;
-        }
-    }*/
 }
