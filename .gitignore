@@ -23,3 +23,9 @@ Interpretator\ Missile/Interpretator\ Missile/obj/Debug/netcoreapp3.1/Interpreta
 Interpretator\ Missile/Interpretator Missile/obj/Debug/netcoreapp3.1/Interpretator\ Missile.csprojAssemblyReference.cache
 Interpretator Missile/Interpretator Missile/obj/Debug/netcoreapp3.1/Interpretator Missile.assets.cache
 Interpretator Missile/Interpretator Missile/obj/Debug/netcoreapp3.1/Interpretator Missile.csprojAssemblyReference.cache
+*.dll
+*.exe
+*.pdb
+*.json
+*.txt
+*.props
