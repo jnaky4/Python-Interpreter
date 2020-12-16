@@ -13,5 +13,22 @@ namespace Interpretator_Missile
         {
             return true;
         }
+        
+        public static string inLoop(string ourString, string[] keywords)
+        {
+            if (!(ourString[ourString.Length - 1] == ':'))
+            {
+                Console.WriteLine("Error, missing :");
+                return null;
+            }
+
+            foreach (var keyword in keywords)
+            {
+                if (ourString.Contains(keyword))
+                    return keyword;
+            }
+
+            return "false";
+        }
     }
 }
