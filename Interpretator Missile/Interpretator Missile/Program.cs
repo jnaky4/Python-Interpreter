@@ -5,6 +5,7 @@ using static Interpretator_Missile.Print;
 using static Interpretator_Missile.Assignment;
 using static Interpretator_Missile.Logical_Statement;
 using static Interpretator_Missile.Conditional_Statements;
+using static Interpretator_Missile.Loops;
 
 namespace Interpretator_Missile
 {
@@ -13,7 +14,7 @@ namespace Interpretator_Missile
 
         //variable containers (variable name, variable value)
         static List<(string, double)> numbers = new List<(string, double)>();
-        static List<(string, string)> strings = new List<(string, string)>();
+        static List<(string, string)> strings = new List<(string, string)>();3
 
         static bool in_loop = false;
         static int current_tab = 0;
@@ -41,7 +42,6 @@ namespace Interpretator_Missile
 
             while (true)
             {
-                in_loop = false;
                 //Write To Console****************
                 Console.Write(">>>");
                 for (int i = 0; i < indentation; i++)
@@ -69,6 +69,9 @@ namespace Interpretator_Missile
                 }
                 //Comment functinallity
                 //**********************************
+
+
+
 
 
 
@@ -112,6 +115,13 @@ namespace Interpretator_Missile
                     Assignment_Statement(ourString, null, 0, strings, numbers);
                     //Assignment_Operator(ourString, null, 0, strings, numbers);
                 }
+
+                //LOOP Logic**********************
+                if (in_loop)
+                {
+                    //LOOP()
+                }
+                //********************************
 
 
                 //EXIT*****************************
@@ -176,12 +186,6 @@ namespace Interpretator_Missile
 
 
 
-        //while and for Loops 
-        //TODO
-        static bool LOOP(string ourString, string key_word, int tabs)
-        {
-            return true;
-        }
 
 
     }
