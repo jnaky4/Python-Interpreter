@@ -57,8 +57,13 @@ namespace Interpretator_Missile
                 string ourString;
                 //START READING*********************
                 if (al.Count == 0) ourString = Console.ReadLine();
-                else ourString = al[0].ToString();
-                al.RemoveAt(0);
+                else
+                {
+                    ourString = al[0].ToString();
+                    al.RemoveAt(0);
+                }
+                    
+                
 
                 //COMMENTING***********************
                 //gives us our string that the person wrote in
