@@ -3,10 +3,17 @@
 *.json
 *.props
 *.cache
+**.cache
 .vs/*
 **/.vs/*
 **/bin/*
 **/obj/*
+Debug/
+Release/
+*Debug/
+*Release/
+**Debug/
+**Release/
 Interpretator\ Missile/*
 Interpretator\ Missile/Interpretator\ Missile/bin/*
 Interpretator\ Missile/Interpretator\ Missile/obj/*
