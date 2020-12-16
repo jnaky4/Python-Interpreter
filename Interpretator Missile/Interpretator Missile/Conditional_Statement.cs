@@ -11,9 +11,10 @@ namespace Interpretator_Missile
         public static bool Conditional_Statement(string[] split, string condition, List<(string, double)> numbers, List<(string, string)> strings)
         {
             bool statement = false;
-            double x = 0, y = 0;
-
-            if (double.IsNaN(double.Parse(split[0])) == false) x = double.Parse(split[0]);
+            double x = double.NaN, y = double.NaN;
+            bool check = false;
+            check = double.TryParse(split[0], out x);
+            if (double.IsNaN(x) == false && check == true) x = double.Parse(split[0]);
             else
             {
                 foreach (var s in numbers)
@@ -24,7 +25,9 @@ namespace Interpretator_Missile
                     }
                 }
             }
-            if (double.IsNaN(double.Parse(split[1])) == false) y = double.Parse(split[1]);
+            check = false;
+            check = double.TryParse(split[1], out y);
+            if (double.IsNaN(y) == false && check == true) y = double.Parse(split[1]);
             else
             {
                 foreach (var s in numbers)
@@ -59,7 +62,6 @@ namespace Interpretator_Missile
                 default:
                     break;
             }
-            Console.WriteLine("x: " + x + " y: " + y + " condition: " + condition + " " + statement);
             return statement;
         }
     }

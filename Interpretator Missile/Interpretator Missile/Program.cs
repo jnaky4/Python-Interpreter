@@ -41,6 +41,7 @@ namespace Interpretator_Missile
 
             while (true)
             {
+                in_loop = false;
                 //Write To Console****************
                 Console.Write(">>>");
                 for (int i = 0; i < indentation; i++)
