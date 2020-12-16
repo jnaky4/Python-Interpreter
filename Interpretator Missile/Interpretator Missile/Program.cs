@@ -16,9 +16,16 @@ namespace Interpretator_Missile
         //variable containers (variable name, variable value)
         static List<(string, double)> numbers = new List<(string, double)>();
         static List<(string, string)> strings = new List<(string, string)>();
+        
+        //static ArrayList al = new ArrayList();//Stores block commands
+        static List<(string, int)> al = new List<(string, int)>();
+        static List<(string, int)> loop_stored = new List<(string, int)>();
+
 
         static bool in_loop = false;
         static int current_tab = 0;
+        static int loop_tab = 0;
+        static string loop_command;
 
 
         static void Main(string[] args)
@@ -38,13 +45,15 @@ namespace Interpretator_Missile
             
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
-            ArrayList al = new ArrayList();
+            
 
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
             int indentation = 0;
 
             while (true)
             {
+                string ourString;
+                current_tab = 0;
                 //Write To Console****************
                 Console.Write(">>>");
                 for (int i = 0; i < indentation; i++)
@@ -54,7 +63,92 @@ namespace Interpretator_Missile
                 //formats the command line correctly for us
                 //**********************************'
 
-                string ourString;
+
+
+                //in_loop set to true, never grabs block data
+                if (!in_loop)
+                {
+                    ourString = Console.ReadLine();
+
+
+                    while (ourString.Substring(0, 1) == "\t")
+                    {
+                        current_tab++;
+                        ourString = ourString.Substring(1);
+                    }
+                }
+
+
+
+                //if current tab has same # of tabs or less, not in loop
+                if((current_tab <= loop_tab) == true)
+                {
+                    //if not in previous loop
+                    if(loop_stored.Count == 0)
+                    {
+
+                    }
+                    //we were just in a loop
+                    else
+                    {
+                        //evaluate loop condition
+                        loop_command = loop_stored[loop_stored.Count-1].Item1;
+                        loop_tab = loop_stored[loop_stored.Count - 1].Item2;
+                        foreach (var s in key_words)
+                        {
+                            if (loop_command.Contains(s))
+                            {
+                                if (!(ourString[ourString.Length - 1] == ':'))
+                                {
+                                    //ERROR
+                                    Console.WriteLine("Missing :");
+                                }
+                                else
+                                {
+                                    string key_word = s;
+                                    int length = loop_command.IndexOf(s) + s.Length;
+                                    //Split between keyword and : 
+                                    string comparison = loop_command.Substring(length);
+                                    comparison = comparison.Substring(0, comparison.Length - 1);
+                                    bool logic_evaluated = Logical_Statment(comparison, s, 0, numbers, strings);
+                                    if (logic_evaluated)
+                                    {
+                                        in_loop = true;
+                                        //evaluate commands in array
+
+                                    }
+                                    else
+                                    {
+                                        in_loop = false;
+                                        loop_tab = 0;
+                                        foreach(var command in al)
+                                        {
+                                            if(command.Item2 > loop_tab)
+                                            {
+                                                al.Remove(command);
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                }
+                //we are in loop
+                else
+                {      
+                    //if loop_evaluated to true store commands
+                    if (in_loop)
+                    {
+                        al.Add((ourString, current_tab));
+                    }
+                }
+
+
+
+
+
+
+
                 //START READING*********************
                 if (al.Count == 0) ourString = Console.ReadLine();
                 else
@@ -62,8 +156,8 @@ namespace Interpretator_Missile
                     ourString = al[0].ToString();
                     al.RemoveAt(0);
                 }
-                    
-                
+
+
 
                 //COMMENTING***********************
                 //gives us our string that the person wrote in
@@ -82,7 +176,7 @@ namespace Interpretator_Missile
                 {
                     Console.WriteLine("FOUND TAB");
                 }
-                    
+
 
 
                 //TODO NEEDS TO COUNT TABS
@@ -130,11 +224,11 @@ namespace Interpretator_Missile
                 {
                     string temp_string;
                     //Console.WriteLine("STRIPPING TABS");
-                    if((temp_string = Console.ReadLine()).Substring(0,1) == "\t")
+                    if ((temp_string = Console.ReadLine()).Substring(0, 1) == "\t")
                     {
                         //temp_string = Console.ReadLine();
                         int temp_tabs = 0;
-                        Console.WriteLine(temp_string.Substring(0, 1) + "hello");
+                        //Console.WriteLine(temp_string.Substring(0, 1) + "hello");
 
                         while (temp_string.Substring(0, 1) == "\t")
                         {
@@ -197,13 +291,13 @@ namespace Interpretator_Missile
 
                 if (double.IsNaN(x) == false)
                 {
-                    /*if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
+                    if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
                     {
                         if (x == 0) Console.WriteLine("False");
                         else if (x == 1) Console.WriteLine("True");
                         else Console.WriteLine(x.ToString());
                     }
-                    else Console.WriteLine(x.ToString());*/
+                    else Console.WriteLine(x.ToString());
                 }
                 else if (ourString.Contains("%"))
                 {
