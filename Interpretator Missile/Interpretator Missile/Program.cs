@@ -62,9 +62,6 @@ namespace Interpretator_Missile
                 }
 
 
-                
-
-
                 Console.WriteLine("COMPARING TABS" + current_tab + " " + loop_tab);
 
                 //if current tab has same # of tabs or less, not in loop
@@ -94,14 +91,16 @@ namespace Interpretator_Missile
                             int length = ourString.IndexOf(loop_type) + loop_type.Length;
                             //Split between keyword and : 
                             string comparison = ourString.Substring(length);
-                            comparison = comparison.Substring(0, comparison.Length - 1);
+                            comparison = comparison.Substring(0, comparison.Length - 1).Trim();
+                            
                             bool logic_evaluated = Logical_Statment(comparison, loop_type, 0, numbers, strings);
 
                             //Logic is evaluated, if it returns true, go into next block of code
                             if (logic_evaluated)
                             {
                                 Console.WriteLine("Loop is true! Storing Variables");
-                                loop_stored.Add((loop_type, ourString, current_tab));
+
+                                loop_stored.Add((loop_type, comparison, current_tab));
                                 loop_tab = current_tab;
                                 current_tab = 0;
                                 in_loop = true;
