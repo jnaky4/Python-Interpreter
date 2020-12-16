@@ -38,33 +38,32 @@ namespace Interpretator_Missile
             string variable = split_at_operator[0].Trim();
             string value = split_at_operator[1].Trim();
             (string, int) type = getType(variable, strings, numbers);
+            Expression e = new Expression(value);
+            double num = e.calculate();
             //Console.WriteLine("Variable type: " + type.Item1 + " index: " + type.Item2);
 
             switch (assignment)
             {
                 case ("+="):
-                    //TODO
+                    PlusEquals(variable, value, num, strings, numbers, type);
                     break;
                 case ("-="):
-                    //TODO
+                    MinusEquals(variable, value, num, strings, numbers, type);
                     break;
                 case ("*="):
-                    //TODO
+                    MultiplyEquals(variable, value, num, strings, numbers, type);
                     break;
                 case ("/="):
-                    //Console.WriteLine("found /=");
-                    //TODO
+                    DivideEquals(variable, value, num, strings, numbers, type);
                     break;
                 case ("^="):
-                    //TODO
+                    XOREquals(variable, value, num, strings, numbers, type);
                     break;
                 case ("%="):
-                    //TODO
+                    RemainderEquals(variable, value, num, strings, numbers, type);
                     break;
                 case ("="):
-                    //TODO
-                    //Console.WriteLine("found = ");
-                    equals(variable, value, strings, numbers, type);
+                    Equals(variable, value, num, strings, numbers, type);
                     break;
             }
         }
@@ -116,12 +115,130 @@ namespace Interpretator_Missile
             return -1;
         }
 
-        //handles '=' operator
-        public static void equals(string variable, string value, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        public static void RemainderEquals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
         {
-            Expression e = new Expression(value);
-            double num = e.calculate();
+            if (double.IsNaN(num) == true)
+            {
+                Console.WriteLine("Error: unsuported operand type for %=");
+                return;
+            }
+            else
+            {
+                if (type.Item1 == "number")
+                {
+                    num = numbers[type.Item2].Item2 % num;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: unsupported operand type for %=");
+            }
+        }
 
+        public static void XOREquals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        {
+            if (double.IsNaN(num) == true)
+            {
+                Console.WriteLine("Error: unsuported operand type for ^=");
+                return;
+            }
+            else
+            {
+                if (type.Item1 == "number" && num % 1 == 0 && numbers[type.Item2].Item2 % 1 == 0)
+                {
+                    num = (int) numbers[type.Item2].Item2 ^ (int) num;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: unsupported operand type for ^=");
+            }
+        }
+
+        public static void DivideEquals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        {
+            if (double.IsNaN(num) == true)
+            {
+                Console.WriteLine("Error: unsuported operand type for /=");
+                return;
+            }
+            else
+            {
+                if (type.Item1 == "number")
+                {
+                    num = numbers[type.Item2].Item2 / num;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: unsupported operand type for /=");
+            }
+        }
+
+        public static void MultiplyEquals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        {
+            if (double.IsNaN(num) == true)
+            {
+                Console.WriteLine("Error: unsuported operand type for *=");
+                return;
+            }
+            else
+            {
+                if (type.Item1 == "number")
+                {
+                    num = numbers[type.Item2].Item2 * num;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: unsupported operand type for *=");
+            }
+        }
+
+        public static void MinusEquals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        {
+            if (double.IsNaN(num) == true)
+            {
+                Console.WriteLine("Error: unsuported operand type for -=");
+                return;
+            }
+            else
+            {
+                if (type.Item1 == "number")
+                {
+                    num = numbers[type.Item2].Item2 - num;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: unsupported operand type for -=");
+            }
+        }
+
+        //handles '+=' for strings and numbers
+        public static void PlusEquals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        {
+            if (double.IsNaN(num) == true)
+            {
+                if (type.Item1 == "string")
+                {
+                    value = strings[type.Item2].Item2 + value;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: variable not found");
+            }
+            else
+            {
+                if (type.Item1 == "number")
+                {
+                    num += numbers[type.Item2].Item2;
+                    Equals(variable, value, num, strings, numbers, type);
+                }
+                else
+                    Console.WriteLine("Error: variable not found");
+                
+            }
+        }
+
+        //handles '=' operator
+        public static void Equals(string variable, string value, double num, List<(string, string)> strings, List<(string, double)> numbers, (string, int) type)
+        {
             if (double.IsNaN(num) == true)
             {
                 //new variable needs to be added to the list
@@ -138,6 +255,7 @@ namespace Interpretator_Missile
                         strings[type.Item2] = (variable, value);
                         return;
                     }
+                    //differing data type need to change typd of variable
                     if (type.Item1 == "number")
                     {
                         numbers.Remove(numbers[type.Item2]);
@@ -147,7 +265,6 @@ namespace Interpretator_Missile
                 }
 
                 strings.Add((variable, value));
-                //Console.WriteLine("String " + variable + " = " + value);
                 return;
             }
             else
@@ -160,11 +277,13 @@ namespace Interpretator_Missile
                 }
                 else
                 {
+                    //matching type need to update old value
                     if (type.Item1 == "number")
                     {
                         numbers[type.Item2] = (variable, num);
                         return;
                     }
+                    //differing type need to change data type of variable
                     if (type.Item1 == "string")
                     {
                         strings.Remove(strings[type.Item2]);
@@ -172,7 +291,6 @@ namespace Interpretator_Missile
                         return;
                     }
                 }
-                //Console.WriteLine("Number " + variable + " = " + num);
                 return;
             }
         }
