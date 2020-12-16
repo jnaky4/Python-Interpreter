@@ -92,15 +92,20 @@ namespace Interpretator_Missile
                                 PrintFunction(ourString, numbers, strings);
                             }
 
-
+                            Assignment_Statement(ourString, null, 0, strings, numbers);
+                            foreach(var s in strings)
+                            {
+                                Console.WriteLine(s);
+                            }
+                            foreach (var t in numbers)
+                            {
+                                Console.WriteLine(t);
+                            }
 
                         }
                         //we are in a new loop
                         else
                         {
-                            
-
-
                             int length = ourString.IndexOf(loop_type) + loop_type.Length;
                             //Split between keyword and : 
                             string comparison = ourString.Substring(length);
@@ -124,7 +129,8 @@ namespace Interpretator_Missile
                                 current_tab = 0;
                                 loop_tab = 0;
                             }
-                            //else evaluate 
+
+
                         }
 
 
@@ -156,7 +162,7 @@ namespace Interpretator_Missile
                         {
                             in_loop = true;
                             //evaluate commands in array
-        
+                               
 
                         }
                         //loop is no longer true, exit loop
