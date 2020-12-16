@@ -65,18 +65,17 @@ namespace Interpretator_Missile
 
 
 
-                //in_loop set to true, never grabs block data
-                if (!in_loop)
+
+
+                ourString = Console.ReadLine();
+
+
+                while (ourString.Substring(0, 1) == "\t")
                 {
-                    ourString = Console.ReadLine();
-
-
-                    while (ourString.Substring(0, 1) == "\t")
-                    {
-                        current_tab++;
-                        ourString = ourString.Substring(1);
-                    }
+                    current_tab++;
+                    ourString = ourString.Substring(1);
                 }
+
 
 
 
@@ -92,8 +91,11 @@ namespace Interpretator_Missile
                     else
                     {
                         //evaluate loop condition
+                        //grab loop command
                         loop_command = loop_stored[loop_stored.Count-1].Item1;
+                        //grab tab_count from loop
                         loop_tab = loop_stored[loop_stored.Count - 1].Item2;
+                        //grab keyword from loop, split into logical_statements to be evaluated
                         foreach (var s in key_words)
                         {
                             if (loop_command.Contains(s))
@@ -111,12 +113,15 @@ namespace Interpretator_Missile
                                     string comparison = loop_command.Substring(length);
                                     comparison = comparison.Substring(0, comparison.Length - 1);
                                     bool logic_evaluated = Logical_Statment(comparison, s, 0, numbers, strings);
+
+                                    //logic evaluated to true
                                     if (logic_evaluated)
                                     {
                                         in_loop = true;
                                         //evaluate commands in array
 
                                     }
+                                    //loop is no longer true, exit loop
                                     else
                                     {
                                         in_loop = false;
@@ -149,7 +154,7 @@ namespace Interpretator_Missile
 
 
 
-                //START READING*********************
+                /*//START READING*********************
                 if (al.Count == 0) ourString = Console.ReadLine();
                 else
                 {
@@ -310,7 +315,7 @@ namespace Interpretator_Missile
                     }
                 }
                 //Most of arithmatic is working
-                //******************************************
+                //*******************************************/
 
 
             }
