@@ -6,6 +6,7 @@ using static Interpretator_Missile.Assignment;
 using static Interpretator_Missile.Logical_Statement;
 using static Interpretator_Missile.Conditional_Statements;
 using static Interpretator_Missile.Loops;
+using System.Collections;
 
 namespace Interpretator_Missile
 {
@@ -37,6 +38,7 @@ namespace Interpretator_Missile
             
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
+            ArrayList al = new ArrayList();
 
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
             int indentation = 0;
@@ -52,10 +54,11 @@ namespace Interpretator_Missile
                 //formats the command line correctly for us
                 //**********************************'
 
-
+                string ourString;
                 //START READING*********************
-                string ourString = Console.ReadLine();
-
+                if (al.Count == 0) ourString = Console.ReadLine();
+                else ourString = al[0].ToString();
+                al.RemoveAt(0);
 
                 //COMMENTING***********************
                 //gives us our string that the person wrote in
@@ -130,28 +133,25 @@ namespace Interpretator_Missile
 
                         while (temp_string.Substring(0, 1) == "\t")
                         {
+
                             temp_tabs++;
                             //Console.WriteLine("Contains Tabs");
                             temp_string = temp_string.Substring(1);
                             //Console.WriteLine(temp_string);
-
+                            //al.Add(temp_string);
                         }
                         Console.WriteLine(temp_tabs);
                     }
                     else
-                    {   
+                    {
                         //IF, ELIF, ELSE, end loop
-
+                        al.Add(temp_string);
                         in_loop = false;
                         Console.WriteLine("EXIT LOOP");
                         ourString = temp_string;
                         //current line is still stored
                         //check what kind of loop we are in
                     }
-
-
-
-                    
 
                     //string comparison has all the logic that needs to be reevaluated at each loop
 
