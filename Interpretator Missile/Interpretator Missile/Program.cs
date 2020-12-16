@@ -133,57 +133,59 @@ namespace Interpretator_Missile
                         loop_type = loop_stored[loop_stored.Count - 1].Item1;
                         Console.WriteLine(loop_type);
                         //grab keyword from loop, split into logical_statements to be evaluated
-                        foreach (var s in key_words)
+
+
+                        int length = loop_command.Length;
+                        bool logic_evaluated = Logical_Statment(loop_command, loop_type, loop_tab, numbers, strings);
+
+                        //logic evaluated to true
+                        if (logic_evaluated)
                         {
-                            if (loop_command.Contains(s))
+                            in_loop = true;
+                            //evaluate commands in array
+
+                        }
+                        //loop is no longer true, exit loop
+                        else
+                        {
+                            //clear loop variables
+                            in_loop = false;
+                            loop_tab = 0;
+
+                            //remove blocks stored in block_commands that have more tabs than loop
+                            foreach (var command in block_commands)
                             {
-
-
-                                string key_word = s;
-                                int length = loop_command.IndexOf(s) + s.Length;
-                                //Split between keyword and : 
-                                string comparison = loop_command.Substring(length);
-                                comparison = comparison.Substring(0, comparison.Length - 1);
-                                bool logic_evaluated = Logical_Statment(comparison, s, 0, numbers, strings);
-
-                                //logic evaluated to true
-                                if (logic_evaluated)
+                                if (command.Item2 > loop_tab)
                                 {
-                                    in_loop = true;
-                                    //evaluate commands in array
-
+                                    //remove the 
+                                    block_commands.Remove(command);
                                 }
-                                //loop is no longer true, exit loop
-                                else
+                            }
+                            //remove loop data from loop_stored
+                            foreach (var loops in loop_stored)
+                            {
+                                if (loop_command == loops.Item1)
                                 {
-                                    //clear loop variables
-                                    in_loop = false;
-                                    loop_tab = 0;
-
-                                    //remove blocks stored in block_commands that have more tabs than loop
-                                    foreach (var command in block_commands)
-                                    {
-                                        if (command.Item2 > loop_tab)
-                                        {
-                                            //remove the 
-                                            block_commands.Remove(command);
-                                        }
-                                    }
-                                    //remove loop data from loop_stored
-                                    foreach (var loops in loop_stored)
-                                    {
-                                        if (loop_command == loops.Item1)
-                                        {
-                                            loop_stored.Remove(loops);
-                                        }
-
-                                    }
+                                    loop_stored.Remove(loops);
                                 }
-                                
-
 
                             }
                         }
+                                
+
+
+                   
+
+
+
+
+
+
+
+
+
+
+
                     }
                     
                 }
