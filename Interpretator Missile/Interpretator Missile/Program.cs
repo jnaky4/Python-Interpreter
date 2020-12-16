@@ -17,8 +17,9 @@ namespace Interpretator_Missile
         static List<(string, double)> numbers = new List<(string, double)>();
         static List<(string, string)> strings = new List<(string, string)>();
         
-        //static ArrayList al = new ArrayList();//Stores block commands
-        static List<(string, int)> al = new List<(string, int)>();
+        //static ArrayList block_commands = new ArrayList();//Stores block commands
+        static List<(string, int)> block_commands = new List<(string, int)>();
+        //1: Loop command: ie while, for, if    2: conditional logic    3: tabs
         static List<(string, string, int)> loop_stored = new List<(string, string, int)>();
 
 
@@ -180,13 +181,13 @@ namespace Interpretator_Missile
                                     in_loop = false;
                                     loop_tab = 0;
 
-                                    //remove blocks stored in al that have more tabs than loop
-                                    foreach (var command in al)
+                                    //remove blocks stored in block_commands that have more tabs than loop
+                                    foreach (var command in block_commands)
                                     {
                                         if (command.Item2 > loop_tab)
                                         {
                                             //remove the 
-                                            al.Remove(command);
+                                            block_commands.Remove(command);
                                         }
                                     }
                                     //remove loop data from loop_stored
@@ -215,7 +216,7 @@ namespace Interpretator_Missile
                     if (in_loop)
                     {
                         Console.WriteLine("adding to Block Data Array");
-                        al.Add((ourString, current_tab));
+                        block_commands.Add((ourString, current_tab));
                     }
                 }
 
@@ -226,11 +227,11 @@ namespace Interpretator_Missile
 
 
                     /*//START READING*********************
-                    if (al.Count == 0) ourString = Console.ReadLine();
+                    if (block_commands.Count == 0) ourString = Console.ReadLine();
                     else
                     {
-                        ourString = al[0].ToString();
-                        al.RemoveAt(0);
+                        ourString = block_commands[0].ToString();
+                        block_commands.RemoveAt(0);
                     }
 
 
@@ -305,14 +306,14 @@ namespace Interpretator_Missile
                                 //Console.WriteLine("Contains Tabs");
                                 temp_string = temp_string.Substring(1);
                                 //Console.WriteLine(temp_string);
-                                //al.Add(temp_string);
+                                //block_commands.Add(temp_string);
                             }
                             Console.WriteLine(temp_tabs);
                         }
                         else
                         {
                             //IF, ELIF, ELSE, end loop
-                            al.Add(temp_string);
+                            block_commands.Add(temp_string);
                             in_loop = false;
                             Console.WriteLine("EXIT LOOP");
                             ourString = temp_string;
