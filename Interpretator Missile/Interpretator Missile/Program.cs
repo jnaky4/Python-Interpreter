@@ -6,6 +6,7 @@ using static Interpretator_Missile.Assignment;
 using static Interpretator_Missile.Logical_Statement;
 using static Interpretator_Missile.Conditional_Statements;
 using static Interpretator_Missile.Loops;
+using static Interpretator_Missile.Simple_Steps;
 using System.Collections;
 
 namespace Interpretator_Missile
@@ -18,6 +19,7 @@ namespace Interpretator_Missile
         static List<(string, string)> strings = new List<(string, string)>();
         
         //static ArrayList block_commands = new ArrayList();//Stores block commands
+
         static List<(string, int)> block_commands = new List<(string, int)>();
         //1: Loop command: ie while, for, if    2: conditional logic    3: tabs
         static List<(string, string, int)> loop_stored = new List<(string, string, int)>();
@@ -32,19 +34,6 @@ namespace Interpretator_Missile
 
         static void Main(string[] args)
         {
-            //Strip commenting
-            //SWITCH: if, while, else, elif, for  ----> all have terminator ':'
-            //and or statements to split on
-            //
-            /*
-                Steps for Breaking down a line of code:
-                1) strip commenting
-                2) strip on key words
-                3) 
-             
-             */
-
-            
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
             
@@ -56,20 +45,14 @@ namespace Interpretator_Missile
             {
                 string ourString;
                 current_tab = 0;
-                //Write To Console****************
-                Console.Write(">>>");
-                for (int i = 0; i < indentation; i++)
-                {
-                    Console.Write(".");
-                }
-                //formats the command line correctly for us
-                //**********************************'
 
 
-
-
-                
+                //print to terminal
+                Terminal_Ouput(indentation);
+               
                 ourString = Console.ReadLine();
+                //remove comments from string
+                ourString = Remove_Comments(ourString);
 
                 //Count leading tabs and strip them
                 while (ourString.Substring(0, 1) == "\t")
@@ -78,15 +61,9 @@ namespace Interpretator_Missile
                     ourString = ourString.Substring(1);
                 }
 
+
                 
-                //REMOVE COMMENTING***********************
-                if (ourString.Contains("#"))
-                {
-                    ourString = ourString.Substring(0, ourString.IndexOf("#"));
-                    Console.WriteLine("Found Commenting, removed it");
-                    Console.WriteLine(ourString);
-                }
-                //**********************************
+
 
                 Console.WriteLine("COMPARING TABS" + current_tab + " " + loop_tab);
 
@@ -111,7 +88,7 @@ namespace Interpretator_Missile
                         //we are in a new loop
                         else
                         {
-
+                            
 
 
                             int length = ourString.IndexOf(loop_type) + loop_type.Length;
@@ -150,9 +127,12 @@ namespace Interpretator_Missile
                         //evaluate loop condition
                         //grab loop command
                         loop_command = loop_stored[loop_stored.Count - 1].Item2;
+                        Console.WriteLine(loop_command);
                         //grab tab_count from loop
                         loop_tab = loop_stored[loop_stored.Count - 1].Item3;
+                        Console.WriteLine(loop_tab);
                         loop_type = loop_stored[loop_stored.Count - 1].Item1;
+                        Console.WriteLine(loop_type);
                         //grab keyword from loop, split into logical_statements to be evaluated
                         foreach (var s in key_words)
                         {
