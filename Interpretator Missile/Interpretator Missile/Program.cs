@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using static Interpretator_Missile.Print;
 using static Interpretator_Missile.Assignment;
-using static Interpretator_Missile.Logical_Statement;
+using static Interpretator_Missile.Logical_Statements;
 using static Interpretator_Missile.Conditional_Statements;
 using static Interpretator_Missile.Loops;
 using static Interpretator_Missile.Simple_Steps;
@@ -36,7 +36,7 @@ namespace Interpretator_Missile
         {
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
-
+            
 
             Console.WriteLine("Hi! Please use this interpeter to write python code. Use the command \"exit\" to quit the program.");
             int indentation = 0;
@@ -51,6 +51,10 @@ namespace Interpretator_Missile
                 Terminal_Ouput(indentation);
                
                 ourString = Console.ReadLine();
+                
+                //Ability to exit from the program
+                if (ourString == "exit") break;
+
                 //remove comments from string
                 ourString = Remove_Comments(ourString);
 
@@ -81,6 +85,15 @@ namespace Interpretator_Missile
                             in_loop = false;
                             //evaluate the line
 
+                            //check for print
+
+                            if (ourString.Contains("print("))
+                            {
+                                PrintFunction(ourString, numbers, strings);
+                            }
+
+
+
                         }
                         //we are in a new loop
                         else
@@ -93,7 +106,7 @@ namespace Interpretator_Missile
                             string comparison = ourString.Substring(length);
                             comparison = comparison.Substring(0, comparison.Length - 1).Trim();
                             
-                            bool logic_evaluated = Logical_Statment(comparison, loop_type, 0, numbers, strings);
+                            bool logic_evaluated = Logical_Statement(comparison, loop_type, 0, numbers, strings);
 
                             //Logic is evaluated, if it returns true, go into next block of code
                             if (logic_evaluated)
@@ -136,13 +149,14 @@ namespace Interpretator_Missile
 
 
                         int length = loop_command.Length;
-                        bool logic_evaluated = Logical_Statment(loop_command, loop_type, loop_tab, numbers, strings);
+                        bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
 
                         //logic evaluated to true
                         if (logic_evaluated)
                         {
                             in_loop = true;
                             //evaluate commands in array
+        
 
                         }
                         //loop is no longer true, exit loop
@@ -172,20 +186,6 @@ namespace Interpretator_Missile
                             }
                         }
                                 
-
-
-                   
-
-
-
-
-
-
-
-
-
-
-
                     }
                     
                 }
@@ -203,61 +203,9 @@ namespace Interpretator_Missile
 
 
 
+                    /*
 
 
-
-
-                    /*//START READING*********************
-                    if (block_commands.Count == 0) ourString = Console.ReadLine();
-                    else
-                    {
-                        ourString = block_commands[0].ToString();
-                        block_commands.RemoveAt(0);
-                    }
-
-
-
-
-
-
-
-                    Console.WriteLine(ourString);
-                    if (ourString.Contains("\t"))
-                    {
-                        Console.WriteLine("FOUND TAB");
-                    }
-
-
-
-                    //TODO NEEDS TO COUNT TABS
-                    //CONDITIONAL STATEMENT*************
-                    //while, for, if, elif, else
-                    foreach (var s in key_words)
-                    {
-                        if (ourString.Contains(s))
-                        {
-                            if (!(ourString[ourString.Length - 1] == ':'))
-                            {
-                                //ERROR
-                                Console.WriteLine("Missing :");
-                            }
-                            else
-                            {
-                                //Grab the keyword
-                                string key_word = s;
-                                int length = ourString.IndexOf(s) + s.Length;
-                                //Split between keyword and : 
-                                string comparison = ourString.Substring(length);
-                                comparison = comparison.Substring(0, comparison.Length - 1);
-                                bool logic_evaluated = Logical_Statment(comparison, s, 0, numbers, strings);
-
-                                //Logic is evaluated, if it returns true, go into next block of code
-                                if (logic_evaluated)
-                                {
-                                    current_tab = 0;
-                                    in_loop = true;
-                                }
-                            }
 
                         }
                     }
@@ -314,58 +262,21 @@ namespace Interpretator_Missile
                     //********************************
 
 
-                    //EXIT*****************************
-                    if (ourString == "exit") break;
-                    //Ability to exit from the program
-                    //**********************************
 
 
 
-                    //Gives us correct indentation
-                    //**********************************
 
 
-                    //PRINTING*****************************
-                    if (ourString.Contains("print("))
-                    {
-                        PrintFunction(ourString, numbers, strings);
-                    }
-                    //Print function
-                    //*************************************
 
-
-                    //MATH*********************************
-                    Expression e = new Expression(ourString);
-                    double x = e.calculate();
-
-
-                    if (double.IsNaN(x) == false)
-                    {
-                        if (ourString.Contains("<") || ourString.Contains("<=") || ourString.Contains(">") || ourString.Contains(">=") || ourString.Contains("==") || ourString.Contains("!="))
-                        {
-                            if (x == 0) Console.WriteLine("False");
-                            else if (x == 1) Console.WriteLine("True");
-                            else Console.WriteLine(x.ToString());
-                        }
-                        else Console.WriteLine(x.ToString());
-                    }
-                    else if (ourString.Contains("%"))
-                    {
-                        ourString = ourString.Replace('%', '#');
-                        Expression f = new Expression(ourString);
-                        double y = f.calculate();
-                        if (double.IsNaN(y) == false)
-                        {
-                            Console.WriteLine(y.ToString());
-                        }
-                    }
-                    //Most of arithmatic is working
-                    //*******************************************/
+                    */
                        
                     
                
             }
+
+
         }
+
 
 
 

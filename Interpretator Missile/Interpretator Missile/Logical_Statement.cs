@@ -6,10 +6,10 @@ using static Interpretator_Missile.Conditional_Statements;
 
 namespace Interpretator_Missile
 {
-    class Logical_Statement
+    class Logical_Statements
     {
         //Logical check (if, elif, else, while, for)
-        public static bool Logical_Statment(string ourString, string key_word, int tabs, List<(string, double)> numbers, List<(string, string)> strings)
+        public static bool Logical_Statement(string ourString, string key_word, int tabs, List<(string, double)> numbers, List<(string, string)> strings)
         {
             ourString = ourString.Trim();
             string[] conditional_statements = { "and", "or", "<=", "<", ">=", ">", "==", "!=" };
@@ -29,12 +29,12 @@ namespace Interpretator_Missile
                     if (condition == "and")
                     {
                         //split ourString at condition and send both through this function again, if BOTH return true then return true
-                        return (Logical_Statment(split_at_condition[0], key_word, tabs, numbers, strings) && Logical_Statment(split_at_condition[1], key_word, tabs, numbers, strings)) ? true : false;
+                        return (Logical_Statement(split_at_condition[0], key_word, tabs, numbers, strings) && Logical_Statement(split_at_condition[1], key_word, tabs, numbers, strings)) ? true : false;
                     }
                     if (condition == "or")
                     {
                         //split ourString at condition and send both through this function again, if EITHER return true then return true
-                        return (Logical_Statment(split_at_condition[0], key_word, tabs, numbers, strings) || Logical_Statment(split_at_condition[1], key_word, tabs, numbers, strings)) ? true : false;
+                        return (Logical_Statement(split_at_condition[0], key_word, tabs, numbers, strings) || Logical_Statement(split_at_condition[1], key_word, tabs, numbers, strings)) ? true : false;
 
                     }
                     //all other statements get passed to conditional statement function, returns boolean from conditional statement
