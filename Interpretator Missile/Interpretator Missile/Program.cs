@@ -14,7 +14,7 @@ namespace Interpretator_Missile
 
         //variable containers (variable name, variable value)
         static List<(string, double)> numbers = new List<(string, double)>();
-        static List<(string, string)> strings = new List<(string, string)>();3
+        static List<(string, string)> strings = new List<(string, string)>();
 
         static bool in_loop = false;
         static int current_tab = 0;
@@ -34,6 +34,7 @@ namespace Interpretator_Missile
              
              */
 
+            
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
 
@@ -73,7 +74,12 @@ namespace Interpretator_Missile
 
 
 
-
+                Console.WriteLine(ourString);
+                if (ourString.Contains("\t"))
+                {
+                    Console.WriteLine("FOUND TAB");
+                }
+                    
 
 
                 //TODO NEEDS TO COUNT TABS
@@ -119,6 +125,9 @@ namespace Interpretator_Missile
                 //LOOP Logic**********************
                 if (in_loop)
                 {
+                    //read all lines that have indentation greater than current until we find line
+                    //that is of same number of tabs to indicate end of loop block
+                    //all of this needs to be fed into the loop
                     //LOOP()
                 }
                 //********************************
@@ -131,12 +140,6 @@ namespace Interpretator_Missile
 
 
 
-                //TAB COUNTING**********************
-                foreach (var s in ourString)
-                {
-                    if (s.CompareTo('\t') == 0) indentation++;
-                }
-                if (ourString.Length == 0) indentation = 0;
                 //Gives us correct indentation
                 //**********************************
 
