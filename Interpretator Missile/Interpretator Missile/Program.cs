@@ -49,11 +49,6 @@ namespace Interpretator_Missile
                 {
                     Console.Write(".");
                 }
-                for (int i = 0; i < indentation; i++)
-                {
-                    Console.Write("\t");
-                }
-                Console.Write(" ");
                 //formats the command line correctly for us
                 //**********************************'
 
@@ -107,7 +102,7 @@ namespace Interpretator_Missile
                             //Logic is evaluated, if it returns true, go into next block of code
                             if (logic_evaluated)
                             {
-                                current_tab = 1;
+                                current_tab = 0;
                                 in_loop = true;
                             }
                         }
@@ -123,12 +118,49 @@ namespace Interpretator_Missile
                 }
 
                 //LOOP Logic**********************
-                if (in_loop)
+                while (in_loop)
                 {
+                    string temp_string;
+                    //Console.WriteLine("STRIPPING TABS");
+                    if((temp_string = Console.ReadLine()).Substring(0,1) == "\t")
+                    {
+                        //temp_string = Console.ReadLine();
+                        int temp_tabs = 0;
+                        Console.WriteLine(temp_string.Substring(0, 1) + "hello");
+
+                        while (temp_string.Substring(0, 1) == "\t")
+                        {
+                            temp_tabs++;
+                            //Console.WriteLine("Contains Tabs");
+                            temp_string = temp_string.Substring(1);
+                            //Console.WriteLine(temp_string);
+
+                        }
+                        Console.WriteLine(temp_tabs);
+                    }
+                    else
+                    {   
+                        //IF, ELIF, ELSE, end loop
+
+                        in_loop = false;
+                        Console.WriteLine("EXIT LOOP");
+                        ourString = temp_string;
+                        //current line is still stored
+                        //check what kind of loop we are in
+                    }
+
+
+
+                    
+
+                    //string comparison has all the logic that needs to be reevaluated at each loop
+
                     //read all lines that have indentation greater than current until we find line
                     //that is of same number of tabs to indicate end of loop block
                     //all of this needs to be fed into the loop
                     //LOOP()
+                    // neeed comparison, tabs
+
                 }
                 //********************************
 
