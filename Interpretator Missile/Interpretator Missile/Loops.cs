@@ -18,6 +18,14 @@ namespace Interpretator_Missile
                 case ("if"):
                     ifCondition(numbers, strings, block_commands, loop_stored);
                     break;
+                case ("elif"):
+                    break;
+                case ("else"):
+                    break;
+                case ("while"):
+                    break;
+                case ("for"):
+                    break;
                 default:
                     break;
             }

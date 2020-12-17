@@ -174,7 +174,7 @@ namespace Interpretator_Missile
                         {
                             //clear loop variables
                             in_loop = false;
-                            loop_tab = 0;
+                            
 
                             //remove blocks stored in block_commands that have more tabs than loop
                             foreach (var command in block_commands)
@@ -185,15 +185,32 @@ namespace Interpretator_Missile
                                     block_commands.Remove(command);
                                 }
                             }
-                            //remove loop data from loop_stored
-                            foreach (var loops in loop_stored)
-                            {
-                                if (loop_command == loops.Item1)
-                                {
-                                    loop_stored.Remove(loops);
-                                }
 
+
+                            //dont remove if or elif, since we expect else
+                            if(loop_command != "if" || loop_command != "elif")
+                            {
+                                //remove loop data from loop_stored
+                                foreach (var loops in loop_stored)
+                                {
+                                    if (loop_command == loops.Item1)
+                                    {
+                                        loop_stored.Remove(loops);
+                                    }
+                                    //if we reach else, there is an if and maybe elif, remove them
+                                    if (loop_command == "else")
+                                    {
+                                        //if we find an else or if with same # of tabs, remove
+                                        if(loops.Item1 == "if" && loops.Item3 == loop_tab || loops.Item1 == "elif" && loops.Item3 == loop_tab)
+                                        {
+                                            loop_stored.Remove(loops);
+                                        }
+                                    }
+
+                                }
                             }
+                            loop_tab = 0;
+
                         }
                                 
                     }
