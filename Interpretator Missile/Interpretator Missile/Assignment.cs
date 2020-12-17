@@ -39,6 +39,7 @@ namespace Interpretator_Missile
             string variable = split_at_operator[0].Trim();
             string value = split_at_operator[1].Trim();
             (string, int) type = getType(variable, strings, numbers);
+            value = getValue(numbers, strings, value);
             Expression e = new Expression(value);
             double num = e.calculate();
             //Console.WriteLine("Variable type: " + type.Item1 + " index: " + type.Item2);
@@ -98,6 +99,23 @@ namespace Interpretator_Missile
             }
 
             return -1;
+        }
+
+        public static string getValue(List<(string, double)> numbers, List<(string, string)> strings, string value)
+        {
+            foreach(var number in numbers)
+            {
+                if (value.Contains(number.Item1))
+                {
+                    //Console.WriteLine("Value before replacement: " + value);
+                    //Console.WriteLine("Value that will be replaced: " + number.Item1);
+                    //Console.WriteLine("Replacement value: " + number.Item2.ToString());
+                    value = value.Replace(number.Item1, number.Item2.ToString());
+                    //Console.WriteLine("Value after replacement: " + value);
+                    return value;
+                }
+            }
+            return value;
         }
 
         //return -1 if the index isn't found, checks to see if variable is saved as a double
