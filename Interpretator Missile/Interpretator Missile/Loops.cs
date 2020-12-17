@@ -33,11 +33,8 @@ namespace Interpretator_Missile
             }
 
             string loop_type = loop_stored[loop_stored.Count - 1].Item1;
-            Console.WriteLine(loop_type);
             string loop_command = loop_stored[loop_stored.Count - 1].Item2;
-            Console.WriteLine(loop_command);
             int loop_tab = loop_stored[loop_stored.Count - 1].Item3;
-            Console.WriteLine(loop_tab);
 
 
             //return true;
@@ -112,7 +109,7 @@ namespace Interpretator_Missile
             if (ourString.Length == 0) return "false";
             if (!(ourString[ourString.Length - 1] == ':'))
             {
-                Console.WriteLine("Error, missing :");
+                
                 return "false";
             }
 
