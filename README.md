@@ -29,5 +29,7 @@ We had to implement various things for this interpreter:
 
 The simplest way to use this interpreter is to open the project up in Visual Studio and run the code using the built in debugger/compiler.
 
-Diagram of Flow Logic
+## Diagram of Flow Logic
+
+
 <img src="https://github.com/jnaky4/Python-Interpreter/blob/master/Control%20Logic.png" width="750">
