@@ -65,20 +65,15 @@ namespace Interpretator_Missile
                     ourString = ourString.Substring(1);
                 }
 
-
-                Console.WriteLine("COMPARING TABS" + current_tab + " " + loop_tab);
-
                 //if current tab has same # of tabs or less, not in loop
                 if ((current_tab <= loop_tab) == true)
                 {
-                    Console.WriteLine("No new tabs");
                     
                     in_loop = false;
 
                     //if there is no previous loop data stored
                     if (loop_stored.Count == 0)
                     {
-                        Console.WriteLine("We were not previously in a loop");
 
                         //if we are not in a loop
                         if ((loop_type = inLoop(ourString, key_words)) == "false")
@@ -121,7 +116,6 @@ namespace Interpretator_Missile
                             //Logic is evaluated, if it returns true, go into next block of code
                             if (logic_evaluated)
                             {
-                                Console.WriteLine("Loop is true! Storing Variables");
 
                                 loop_stored.Add((loop_type, comparison, current_tab));
                                 loop_tab = current_tab;
@@ -139,8 +133,6 @@ namespace Interpretator_Missile
                     //we were just in a loop
                     else
                     {
-                        Console.WriteLine("Exited Loop");
-                        Console.WriteLine("Evaluating previous loop");
 
                         //bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
                         LOOP(numbers, strings, block_commands, loop_stored);                              
@@ -149,85 +141,12 @@ namespace Interpretator_Missile
                 //we are in loop
                 else
                 {
-                    Console.WriteLine("IN LOOP");
                     //if loop_evaluated to true store commands
                     if (in_loop)
                     {
-                        Console.WriteLine("adding to Block Data Array");
                         block_commands.Add((ourString, current_tab));
                     }
-                }
-
-
-
-                    /*
-
-
-
-                        }
-                    }
-
-                    if (!in_loop)
-                    {
-                        Console.WriteLine("Not in LOOP");
-                        Assignment_Statement(ourString, null, 0, strings, numbers);
-                        //Assignment_Operator(ourString, null, 0, strings, numbers);
-                    }
-
-                    //LOOP Logic**********************
-                    while (in_loop)
-                    {
-                        string temp_string;
-                        //Console.WriteLine("STRIPPING TABS");
-                        if ((temp_string = Console.ReadLine()).Substring(0, 1) == "\t")
-                        {
-                            //temp_string = Console.ReadLine();
-                            int temp_tabs = 0;
-                            //Console.WriteLine(temp_string.Substring(0, 1) + "hello");
-
-                            while (temp_string.Substring(0, 1) == "\t")
-                            {
-
-                                temp_tabs++;
-                                //Console.WriteLine("Contains Tabs");
-                                temp_string = temp_string.Substring(1);
-                                //Console.WriteLine(temp_string);
-                                //block_commands.Add(temp_string);
-                            }
-                            Console.WriteLine(temp_tabs);
-                        }
-                        else
-                        {
-                            //IF, ELIF, ELSE, end loop
-                            block_commands.Add(temp_string);
-                            in_loop = false;
-                            Console.WriteLine("EXIT LOOP");
-                            ourString = temp_string;
-                            //current line is still stored
-                            //check what kind of loop we are in
-                        }
-
-                        //string comparison has all the logic that needs to be reevaluated at each loop
-
-                        //read all lines that have indentation greater than current until we find line
-                        //that is of same number of tabs to indicate end of loop block
-                        //all of this needs to be fed into the loop
-                        //LOOP()
-                        // neeed comparison, tabs
-
-                    }
-                    //********************************
-
-
-
-
-
-
-
-
-                    */
-                       
-                    
+                }            
                
             }
 
@@ -235,7 +154,7 @@ namespace Interpretator_Missile
         }
 
         public static void Main2(string input, int tabs)
-        {
+        { 
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
             int indentation = 0;
@@ -283,21 +202,16 @@ namespace Interpretator_Missile
                     if (!double.IsNaN(x)) Console.WriteLine(x);
                 }
 
-
-                Console.WriteLine("COMPARING TABS" + current_tabs + " " + loop_tab);
-
                 //if current tab has same # of tabs or less, not in loop
                 //if (current_tab == 0) return;
                 if ((current_tabs <= loop_tab) == true )
                 {
-                    Console.WriteLine("No new tabs");
 
                     in_loop = false;
 
                     //if there is no previous loop data stored
                     if (loop_stored.Count == 0)
                     {
-                        Console.WriteLine("We were not previously in a loop");
 
                         //if we are not in a loop
                         if ((loop_type = inLoop(ourString, key_words)) == "false")
@@ -340,7 +254,6 @@ namespace Interpretator_Missile
                             //Logic is evaluated, if it returns true, go into next block of code
                             if (logic_evaluated)
                             {
-                                Console.WriteLine("Loop is true! Storing Variables");
 
                                 loop_stored.Add((loop_type, comparison, current_tabs));
                                 loop_tab = current_tabs;
@@ -358,8 +271,6 @@ namespace Interpretator_Missile
                     //we were just in a loop
                     else
                     {
-                        Console.WriteLine("Exited Loop");
-                        Console.WriteLine("Evaluating previous loop");
 
                         //bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
                         LOOP(numbers, strings, block_commands, loop_stored);
@@ -368,11 +279,9 @@ namespace Interpretator_Missile
                 //we are in loop
                 else
                 {
-                    Console.WriteLine("IN LOOP");
                     //if loop_evaluated to true store commands
                     if (in_loop)
                     {
-                        Console.WriteLine("adding to Block Data Array");
                         block_commands.Add((ourString, current_tab));
                     }
                 }
