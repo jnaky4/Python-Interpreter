@@ -178,7 +178,10 @@ namespace Interpretator_Missile
 
                             //remove blocks stored in block_commands that have more tabs than loop
                             List<(string, int)> temp_block = new List<(string, int)>();
-                            temp_block = block_commands;
+                            foreach(var c in block_commands)
+                            {
+                                temp_block.Add(c);
+                            }
                             foreach (var command in temp_block)
                             {
                                 if (command.Item2 > loop_tab)
