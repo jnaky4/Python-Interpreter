@@ -19,6 +19,7 @@ namespace Interpretator_Missile
                     ifCondition(numbers, strings, block_commands, loop_stored);
                     break;
                 case ("elif"):
+
                     break;
                 case ("else"):
                     break;
@@ -38,7 +39,20 @@ namespace Interpretator_Missile
             string keyword = loop_stored[loop_stored.Count - 1].Item1;
             int tabs = loop_stored[loop_stored.Count - 1].Item3;
             if (Logical_Statement(condition, keyword, tabs, numbers, strings) == true)
-                Console.WriteLine("Hooray");
+            {
+                //grab next tab commands
+                foreach (var command in block_commands)
+                {
+                    if (command.Item2 == tabs + 1)
+                    {
+                        Console.WriteLine(command.Item1);
+                    }
+                }
+
+            }
+            
+
+
         }
         
         public static string inLoop(string ourString, string[] keywords)
