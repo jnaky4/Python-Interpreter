@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using static Interpretator_Missile.Logical_Statement;
+using static Interpretator_Missile.Logical_Statements;
 using System.Text;
 
 namespace Interpretator_Missile
@@ -29,12 +29,13 @@ namespace Interpretator_Missile
             string condition = loop_stored[loop_stored.Count - 1].Item2;
             string keyword = loop_stored[loop_stored.Count - 1].Item1;
             int tabs = loop_stored[loop_stored.Count - 1].Item3;
-            if (Logical_Statment(condition, keyword, tabs, numbers, strings) == true)
+            if (Logical_Statement(condition, keyword, tabs, numbers, strings) == true)
                 Console.WriteLine("Hooray");
         }
         
         public static string inLoop(string ourString, string[] keywords)
         {
+            if (ourString.Length == 0) return "false";
             if (!(ourString[ourString.Length - 1] == ':'))
             {
                 Console.WriteLine("Error, missing :");

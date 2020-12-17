@@ -59,7 +59,7 @@ namespace Interpretator_Missile
                 ourString = Remove_Comments(ourString);
 
                 //Count leading tabs and strip them
-                while (ourString.Substring(0, 1) == "\t")
+                while (ourString.Length > 0 && ourString.Substring(0, 1) == "\t")
                 {
                     current_tab++;
                     ourString = ourString.Substring(1);
@@ -101,7 +101,11 @@ namespace Interpretator_Missile
                             {
                                 Console.WriteLine(t);
                             }
-
+                            if (!ourString.Contains("print("))
+                            {
+                                var x = Math(ourString, numbers);
+                                if (!double.IsNaN(x)) Console.WriteLine(x);
+                            }
                         }
                         //we are in a new loop
                         else

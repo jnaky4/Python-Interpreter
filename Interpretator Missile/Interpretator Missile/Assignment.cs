@@ -11,6 +11,7 @@ namespace Interpretator_Missile
         public static void Assignment_Statement(string ourString, string keyword, int tabs, List <(string, string)> strings, List <(string, double)> numbers)
         {
             ourString = ourString.Trim();
+
             string[] assignment_operators = { "+=", "-=", "*=", "/=", "^=", "%=" };
             string[] split_at_operator;
 
