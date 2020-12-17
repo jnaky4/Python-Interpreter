@@ -72,6 +72,7 @@ namespace Interpretator_Missile
                 if ((current_tab <= loop_tab) == true)
                 {
                     Console.WriteLine("No new tabs");
+                    
                     in_loop = false;
 
                     //if there is no previous loop data stored
@@ -155,12 +156,11 @@ namespace Interpretator_Missile
                         Console.WriteLine(loop_tab);
                         loop_type = loop_stored[loop_stored.Count - 1].Item1;
                         Console.WriteLine(loop_type);
-                        //grab keyword from loop, split into logical_statements to be evaluated
 
 
-                        int length = loop_command.Length;
-                        bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
-
+                        //bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
+                        LOOP(numbers, strings, block_commands, loop_stored);
+                        bool logic_evaluated = false;
                         //logic evaluated to true
                         if (logic_evaluated)
                         {
@@ -174,10 +174,12 @@ namespace Interpretator_Missile
                         {
                             //clear loop variables
                             in_loop = false;
-                            
+
 
                             //remove blocks stored in block_commands that have more tabs than loop
-                            foreach (var command in block_commands)
+                            List<(string, int)> temp_block = new List<(string, int)>();
+                            temp_block = block_commands;
+                            foreach (var command in temp_block)
                             {
                                 if (command.Item2 > loop_tab)
                                 {
@@ -185,6 +187,7 @@ namespace Interpretator_Missile
                                     block_commands.Remove(command);
                                 }
                             }
+                            
 
 
                             //dont remove if or elif, since we expect else
