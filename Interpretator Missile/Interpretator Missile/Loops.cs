@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using static Interpretator_Missile.Logical_Statements;
 using System.Text;
+using static Interpretator_Missile.Program;
 
 namespace Interpretator_Missile
 {
@@ -96,10 +97,8 @@ namespace Interpretator_Missile
                 //grab next tab commands
                 foreach (var command in block_commands)
                 {
-                    if (command.Item2 == tabs + 1)
-                    {
-                        Console.WriteLine(command.Item1);
-                    }
+                    
+                    Main2(command.Item1, command.Item2);
                 }
 
             }

@@ -28,11 +28,10 @@ namespace Interpretator_Missile
         static bool in_loop = false;
         static int current_tab = 0;
         static int loop_tab = 0;
-        static string loop_command;
         static string loop_type;
 
 
-        static void Main(string[] args)
+        static void Main()
         {
 
             string[] key_words = { "while", "if", "elif", "else", "for" };
@@ -43,13 +42,14 @@ namespace Interpretator_Missile
 
             while (true)
             {
+                
                 string ourString;
                 current_tab = 0;
 
 
                 //print to terminal
                 Terminal_Ouput(indentation);
-               
+
                 ourString = Console.ReadLine();
                 
                 //Ability to exit from the program
@@ -234,9 +234,149 @@ namespace Interpretator_Missile
 
         }
 
+        public static void Main2(string input, int tabs)
+        {
+
+            string[] key_words = { "while", "if", "elif", "else", "for" };
+            int indentation = 0;
+
+            //while (true)
+            {
+                int current_tabs = 0;
+                string ourString = "print(\"I fucked up\")";
+                current_tabs = 0;
 
 
+                //print to terminal
+                Terminal_Ouput(indentation);
+
+                if (input != "") ourString = input;
+                //else break;
+
+                //Ability to exit from the program
+                //if (ourString == "exit") break;
+
+                //remove comments from string
+                ourString = Remove_Comments(ourString);
+
+                //Count leading tabs and strip them
+                current_tabs = tabs;
+
+                if (ourString.Contains("print("))
+                {
+                    PrintFunction(ourString, numbers, strings);
+                }
 
 
+                Assignment_Statement(ourString, null, 0, strings, numbers);
+                foreach (var s in strings)
+                {
+                    Console.WriteLine(s);
+                }
+                foreach (var t in numbers)
+                {
+                    Console.WriteLine(t);
+                }
+                if (!ourString.Contains("print("))
+                {
+                    var x = Math(ourString, numbers);
+                    if (!double.IsNaN(x)) Console.WriteLine(x);
+                }
+
+
+                Console.WriteLine("COMPARING TABS" + current_tabs + " " + loop_tab);
+
+                //if current tab has same # of tabs or less, not in loop
+                //if (current_tab == 0) return;
+                if ((current_tabs <= loop_tab) == true )
+                {
+                    Console.WriteLine("No new tabs");
+
+                    in_loop = false;
+
+                    //if there is no previous loop data stored
+                    if (loop_stored.Count == 0)
+                    {
+                        Console.WriteLine("We were not previously in a loop");
+
+                        //if we are not in a loop
+                        if ((loop_type = inLoop(ourString, key_words)) == "false")
+                        {
+                            in_loop = false;
+                            //evaluate the line
+
+                            //check for print
+                            if (ourString.Contains("print("))
+                            {
+                                PrintFunction(ourString, numbers, strings);
+                            }
+
+
+                            Assignment_Statement(ourString, null, 0, strings, numbers);
+                            foreach (var s in strings)
+                            {
+                                Console.WriteLine(s);
+                            }
+                            foreach (var t in numbers)
+                            {
+                                Console.WriteLine(t);
+                            }
+                            if (!ourString.Contains("print("))
+                            {
+                                var x = Math(ourString, numbers);
+                                if (!double.IsNaN(x)) Console.WriteLine(x);
+                            }
+                        }
+                        //we are in a new loop
+                        else
+                        {
+                            int length = ourString.IndexOf(loop_type) + loop_type.Length;
+                            //Split between keyword and : 
+                            string comparison = ourString.Substring(length);
+                            comparison = comparison.Substring(0, comparison.Length - 1).Trim();
+
+                            bool logic_evaluated = Logical_Statement(comparison, loop_type, 0, numbers, strings);
+
+                            //Logic is evaluated, if it returns true, go into next block of code
+                            if (logic_evaluated)
+                            {
+                                Console.WriteLine("Loop is true! Storing Variables");
+
+                                loop_stored.Add((loop_type, comparison, current_tabs));
+                                loop_tab = current_tabs;
+                                current_tabs = 0;
+                                in_loop = true;
+                            }
+                            else
+                            {
+                                in_loop = false;
+                                current_tabs = 0;
+                                loop_tab = 0;
+                            }
+                        }
+                    }
+                    //we were just in a loop
+                    else
+                    {
+                        Console.WriteLine("Exited Loop");
+                        Console.WriteLine("Evaluating previous loop");
+
+                        //bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
+                        LOOP(numbers, strings, block_commands, loop_stored);
+                    }
+                }
+                //we are in loop
+                else
+                {
+                    Console.WriteLine("IN LOOP");
+                    //if loop_evaluated to true store commands
+                    if (in_loop)
+                    {
+                        Console.WriteLine("adding to Block Data Array");
+                        block_commands.Add((ourString, current_tab));
+                    }
+                }
+            }
+        }
     }
 }
