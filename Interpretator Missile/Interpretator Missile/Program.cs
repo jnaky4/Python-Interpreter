@@ -134,93 +134,17 @@ namespace Interpretator_Missile
                                 current_tab = 0;
                                 loop_tab = 0;
                             }
-
-
                         }
-
-
-
                     }
-
                     //we were just in a loop
                     else
                     {
                         Console.WriteLine("Exited Loop");
                         Console.WriteLine("Evaluating previous loop");
-                        //evaluate loop condition
-                        //grab loop command
-                        loop_command = loop_stored[loop_stored.Count - 1].Item2;
-                        Console.WriteLine(loop_command);
-                        //grab tab_count from loop
-                        loop_tab = loop_stored[loop_stored.Count - 1].Item3;
-                        Console.WriteLine(loop_tab);
-                        loop_type = loop_stored[loop_stored.Count - 1].Item1;
-                        Console.WriteLine(loop_type);
-
 
                         //bool logic_evaluated = Logical_Statement(loop_command, loop_type, loop_tab, numbers, strings);
-                        LOOP(numbers, strings, block_commands, loop_stored);
-                        bool logic_evaluated = false;
-                        //logic evaluated to true
-                        if (logic_evaluated)
-                        {
-                            in_loop = true;
-                            //evaluate commands in array
-                               
-
-                        }
-                        //loop is no longer true, exit loop
-                        else
-                        {
-                            //clear loop variables
-                            in_loop = false;
-
-
-                            //remove blocks stored in block_commands that have more tabs than loop
-                            List<(string, int)> temp_block = new List<(string, int)>();
-                            foreach(var c in block_commands)
-                            {
-                                temp_block.Add(c);
-                            }
-                            foreach (var command in temp_block)
-                            {
-                                if (command.Item2 > loop_tab)
-                                {
-                                    //remove the 
-                                    block_commands.Remove(command);
-                                }
-                            }
-                            
-
-
-                            //dont remove if or elif, since we expect else
-                            if(loop_command != "if" || loop_command != "elif")
-                            {
-                                //remove loop data from loop_stored
-                                foreach (var loops in loop_stored)
-                                {
-                                    if (loop_command == loops.Item1)
-                                    {
-                                        loop_stored.Remove(loops);
-                                    }
-                                    //if we reach else, there is an if and maybe elif, remove them
-                                    if (loop_command == "else")
-                                    {
-                                        //if we find an else or if with same # of tabs, remove
-                                        if(loops.Item1 == "if" && loops.Item3 == loop_tab || loops.Item1 == "elif" && loops.Item3 == loop_tab)
-                                        {
-                                            loop_stored.Remove(loops);
-                                        }
-                                    }
-
-                                }
-                            }
-                            loop_tab = 0;
-
-                        }
-                                
-                    }
-                    
+                        LOOP(numbers, strings, block_commands, loop_stored);                              
+                    }                  
                 }
                 //we are in loop
                 else
